@@ -12,6 +12,17 @@ class DbInterface {
         }catch(SQLException e) {System.out.println("Exception: "+e);}
     }
 
+    public static ResultSet fetch_table(String query){
+        ResultSet rs = null;
+        try{
+            Statement smt = con.createStatement();
+            rs = smt.executeQuery(query);
+        }catch(Exception e){
+            System.out.println("Exception in fetch_table(): "+e);
+        }
+        return rs;
+    }
+
     public static boolean initialize(){
         try{
             Class.forName("oracle.jdbc.driver.OracleDriver");
