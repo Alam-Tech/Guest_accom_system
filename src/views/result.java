@@ -44,7 +44,7 @@ class search extends JFrame implements ActionListener {
             sp1 = new JPanel();
             sp1.setLayout(null);
             sp1.setBackground(Color.WHITE);
-            sp1.setPreferredSize(new Dimension(700, 200));
+            sp1.setPreferredSize(new Dimension(800, 200));
            // if(i<t){
             if(bookaroom.el.isSelected())
                 h1 = new JLabel("ELITE HOUSE "+i);
@@ -74,7 +74,7 @@ class search extends JFrame implements ActionListener {
             sp1.add(bn[i]);
             bn[i].addActionListener(this);
             bn[i].setBounds(510, 40, 100, 40);
-                sp1.setBorder(new LineBorder(Color.BLACK));
+                sp1.setBorder(new LineBorder(Color.BLACK,2));
            // }
            // else
              //   sp1.setBorder(new LineBorder(Color.WHITE));
@@ -82,7 +82,7 @@ class search extends JFrame implements ActionListener {
         }
         cp.add(p1, BorderLayout.NORTH);
         add(cp);
-        setSize(850, 850);
+        setSize(820, 820);
         setLayout(new FlowLayout());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);

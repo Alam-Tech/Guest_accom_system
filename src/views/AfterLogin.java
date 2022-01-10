@@ -21,19 +21,19 @@ class AfterLoginGui extends JFrame implements ActionListener{
         add(y);
         br = new JButton("Book a Room");
         br.setBounds(140, 90, 130, 23);
-        br.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        br.setFont(new Font("Tahoma", Font.PLAIN, 15));
         add(br);
         yb = new JButton("Your Bookings");
         yb.setBounds(140, 130, 130, 23);
-        yb.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        yb.setFont(new Font("Tahoma", Font.PLAIN, 15));
         add(yb);
         cb = new JButton("Cancel Booking");
         cb.setBounds(140, 170, 130, 23);
-        cb.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        cb.setFont(new Font("Tahoma", Font.PLAIN, 15));
         add(cb);
         pb = new JButton("Previous Booking");
-        pb.setBounds(140, 210, 130, 23);
-        pb.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        pb.setBounds(140, 210, 150, 23);
+        pb.setFont(new Font("Tahoma", Font.PLAIN, 15));
         add(pb);
         lo = new JButton("Logout");
         lo.setBounds(300, 50, 100, 23);
@@ -76,6 +76,24 @@ class AfterLoginGui extends JFrame implements ActionListener{
 }
 public class AfterLogin {
     public static void main(String[] args) {
+
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    try {
+                        UIManager.setLookAndFeel(info.getClassName());
+                    } catch (ClassNotFoundException e) {
+                        System.out.println("Error!!! "+e);
+                    } catch (InstantiationException e) {
+                        System.out.println("Error!!! "+e);
+                    } catch (IllegalAccessException e) {
+                        System.out.println("Error!!! "+e);
+                    } catch (UnsupportedLookAndFeelException e) {
+                        System.out.println("Error!!! "+e);
+                    }
+                    break;
+                }
+            }
+
         AfterLoginGui g = new AfterLoginGui();
     }
 }
