@@ -4,13 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Properties;
 
 class bookaroom extends JFrame implements ActionListener {
 
     static JCheckBox ac;
     JLabel bath,date,op,nop,nor,pref,toh,nos;
     ButtonGroup bg,bg2;
-    JComboBox<String> cb,day,mon,yr,days;
+    JComboBox<String> cb,days;
     static JRadioButton el,n,no,s;
     JCheckBox fr,gy,mg,ki,mo,sw,wm;
     JButton sh,click;
@@ -63,18 +64,11 @@ class bookaroom extends JFrame implements ActionListener {
         date.setFont(new Font("Tahoma", Font.PLAIN, 12));
         add(date);
         date.setBounds(50, 320, 130, 15);
-        day = new JComboBox<>();
-        day.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        add(day);
-        day.setBounds(190, 320, 50, 19);
-        mon = new JComboBox<>();
-        mon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-        add(mon);
-        mon.setBounds(260, 320, 50, 19);
-        yr = new JComboBox<>();
-        yr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022", "2023", "2024" }));
-        add(yr);
-        yr.setBounds(330, 320, 60, 19);
+        org.jdatepicker.impl.UtilDateModel model = new org.jdatepicker.impl.UtilDateModel();
+        org.jdatepicker.impl.JDatePanelImpl datePanel = new org.jdatepicker.impl.JDatePanelImpl(model, new Properties());
+        org.jdatepicker.impl.JDatePickerImpl datePicker = new org.jdatepicker.impl.JDatePickerImpl(datePanel,new DateLabelFormatter());
+        datePicker.setBounds(190,320,200,30);
+        add(datePicker);
         nos = new JLabel("No of days of stay:");
         nos.setFont(new Font("Tahoma", Font.PLAIN, 12)); // NOI18N
         add(nos);
