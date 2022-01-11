@@ -1,21 +1,25 @@
 package views;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.border.LineBorder;
 
 class search extends JFrame implements ActionListener {
     int t= bookaroom.count2;
+    int n=4;//NO OF HOUSES
+    int size;
+    String[] x = new String[n];
+    int[] cost = new int[n];
     JPanel p1,p2,cp,sp1;
     JLabel li,cpd,h1,pic;
     JScrollPane sp;
-    JButton[] bn = new JButton[3];
-    JButton[] loc = new JButton[3];
+    JButton[] bn = new JButton[n];
+    JButton[] loc = new JButton[n];
     search() {
         setTitle("Results");
         p1 = new JPanel();
@@ -30,26 +34,34 @@ class search extends JFrame implements ActionListener {
         p2 = new JPanel();
         p2.setLayout(new GridLayout(-1, 1));
         p2.setBackground(Color.WHITE);
-        p2.setPreferredSize(new Dimension(800, 1000));
+        size=n*300;
+        p2.setPreferredSize(new Dimension(800, size));
         p2.setAutoscrolls(true);
         sp = new JScrollPane(p2);
-        sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        sp.setBounds(0, 0, 800, 1300);
+        sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        sp.setBounds(0, 0, 800, 1000);
         cp = new JPanel(new BorderLayout());
         cp.setPreferredSize(new Dimension(800, 800));
         cp.add(sp, BorderLayout.CENTER);
-
-        for (int i = 0; i < 3; i++) {
+        x[0]="House 1";
+        x[1]="House 2";
+        x[2]="House 3";
+        x[3]="House 3";
+        cost[0]=100;
+        cost[1]=200;
+        cost[2]=300;
+        cost[3]=300;
+        for (int i = 0; i < n; i++) {
             sp1 = new JPanel();
             sp1.setLayout(null);
             sp1.setBackground(Color.WHITE);
             sp1.setPreferredSize(new Dimension(800, 200));
            // if(i<t){
-            if(bookaroom.el.isSelected())
-                h1 = new JLabel("ELITE HOUSE "+i);
-            else
-                h1 = new JLabel("HOUSE "+i);
+            //if(bookaroom.el.isSelected())
+                //h1 = new JLabel("ELITE HOUSE "+i);
+            //else
+            h1 = new JLabel(x[i]);
             h1.setFont(new Font("Tahoma", Font.PLAIN, 24));
             sp1.add(h1);
             h1.setBounds(290, 30, 171, 62);
@@ -63,7 +75,7 @@ class search extends JFrame implements ActionListener {
             catch(Exception e) {
                 System.out.println("Image not available");
             }
-            cpd = new JLabel("Cost per day");
+            cpd = new JLabel(cost[i]+" per day");
             cpd.setFont(new Font("Tahoma", Font.PLAIN, 18));
             sp1.add(cpd);
             cpd.setBounds(290, 100, 171, 48);
