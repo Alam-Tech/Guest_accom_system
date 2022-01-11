@@ -1,5 +1,63 @@
 package views;
 
+import javax.swing.*;
+import java.awt.*;
+
+class Success_dialogue extends javax.swing.JDialog
+{
+    public Success_dialogue(String Transaction_id, Payment_window window)
+    {
+        setLayout(null);
+        setSize(330,230);
+        JLabel success_message=new JLabel("The transaction was successful!");
+        success_message.setBounds(20,20,300,30);
+        success_message.setFont(new Font("Sans Serif",Font.PLAIN,18));
+        JLabel print_id=new JLabel("Transaction ID: "+Transaction_id);
+        print_id.setBounds(70,70,200,30);
+        print_id.setFont(new Font("Sans Serif",Font.PLAIN,18));
+        JButton ok=new JButton("Done");
+        ok.setBounds(100,120,100,30);
+        ok.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                dispose();
+                window.dispose();
+            }
+        });
+        add(success_message);
+        add(print_id);
+        add(ok);
+    }
+}
+
+class failure_dialogue extends javax.swing.JDialog
+{
+    public failure_dialogue(String Transaction_id)
+    {
+        setLayout(null);
+        setSize(330,230);
+        JLabel failure_message=new JLabel("The transaction has failed!");
+        failure_message.setBounds(20,20,300,30);
+        failure_message.setFont(new Font("Sans Serif",Font.PLAIN,18));
+        JLabel print_id=new JLabel("Transaction ID: "+Transaction_id);
+        print_id.setBounds(70,70,200,30);
+        print_id.setFont(new Font("Sans Serif",Font.PLAIN,18));
+        JButton ok=new JButton("Go Back");
+        ok.setBounds(100,120,100,30);
+        ok.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                dispose();
+            }
+        });
+        add(failure_message);
+        add(print_id);
+        add(ok);
+    }
+}
+
 public class Payment_window extends javax.swing.JFrame {
 
     public Payment_window() {
@@ -49,7 +107,36 @@ public class Payment_window extends javax.swing.JFrame {
         pay_button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         String amount="1234";
         pay_button.setText("Pay "+amount);
-
+        Payment_window this_window=this;
+        pay_button.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                System.out.println("Payment Button clicked");
+                Boolean payment_result=true;//Do controller processing of payment here and return whether it succeeded
+                if(payment_result)
+                {
+                    try {
+                        Success_dialogue dialog = new Success_dialogue("1234",this_window);
+                        dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                        dialog.setVisible(true);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                else
+                {
+                    try {
+                        failure_dialogue dialog = new failure_dialogue("1234");
+                        dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                        dialog.setVisible(true);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
