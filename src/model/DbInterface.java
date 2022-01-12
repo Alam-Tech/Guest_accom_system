@@ -2,7 +2,7 @@ package model;
 
 import java.sql.*;
 
-class DbInterface {
+public class DbInterface {
     private static Connection con;
 
     private static void commit(){

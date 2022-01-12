@@ -58,7 +58,7 @@ class AfterLoginGui extends JFrame implements ActionListener{
         if(e.getSource()==br){
             //Book a room
             dispose();
-            bookaroom b = new bookaroom();
+            Bookaroom b = new Bookaroom(1);
         }
         if(e.getSource()==yb){
             //your booking
