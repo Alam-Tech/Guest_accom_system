@@ -14,7 +14,7 @@ public class ResultWindow extends JFrame{
     private int i;
     
     public ResultWindow(int user_id,ArrayList<Object[]> house_tray,OrderInfo order_info) {
-        
+        setBackground(new java.awt.Color(204, 204, 204));
         setTitle("Results");
         p1 = new JPanel();
         p1.setLayout(new FlowLayout());
@@ -54,8 +54,24 @@ public class ResultWindow extends JFrame{
         setVisible(true);
     }
 
-    // public static void main(String args[]){
-    //     ResultWindow sample_win = new ResultWindow();
-    // }
+     public static void main(String args[]){
+         try {
+             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                 if ("Nimbus".equals(info.getName())) {
+                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                     break;
+                 }
+             }
+         } catch (ClassNotFoundException ex) {
+             java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+         } catch (InstantiationException ex) {
+             java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+         } catch (IllegalAccessException ex) {
+             java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+             java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+         }
+         ResultWindow sample_win = new ResultWindow();
+     }
 }
 

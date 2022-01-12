@@ -74,6 +74,7 @@ class AfterLoginGui extends JFrame implements ActionListener{
         }
     }
 }
+
 public class AfterLogin {
     public static void main(String[] args) {
 
