@@ -71,7 +71,7 @@ public class ResultWindow extends JFrame{
          } catch (javax.swing.UnsupportedLookAndFeelException ex) {
              java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
          }
-         ResultWindow sample_win = new ResultWindow();
+         //ResultWindow sample_win = new ResultWindow();
      }
 }
 

@@ -1,25 +1,33 @@
 package views;
 
 import javax.imageio.ImageIO;
+
+import controller.HouseInfoController;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 
 import model.OrderInfo;
 
 public class HouseInfoWindow extends javax.swing.JFrame {
-
+    private int user_id,house_id;
+    private OrderInfo order_info;
     public HouseInfoWindow(int user_id,int house_id,OrderInfo order_info) {
-        
-        // int user_id,int house_id,OrderInfo order_info
         initComponents();
+        HouseInfoController.fill_details(this, house_id);
+        
+        this.user_id = user_id;
+        this.house_id = house_id;
+        this.order_info = order_info;
+        
         setVisible(true);
     }
 
     private void initComponents() {
         Book_button = new javax.swing.JButton();
         Map_house = new javax.swing.JButton();
-        House_no = new javax.swing.JLabel();
-        Houserate = new javax.swing.JLabel();
+        house_name = new javax.swing.JLabel();
+        house_rate = new javax.swing.JLabel();
         house_image = new javax.swing.JLabel();
         Accessory_heading = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -35,24 +43,26 @@ public class HouseInfoWindow extends javax.swing.JFrame {
         Book_button.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                System.out.println("Button clicked");
-                //OrderSummaryWindow Order_window = new OrderSummaryWndow();
+                //System.out.println("Button clicked");
+                OrderSummaryWindow Order_window = new OrderSummaryWindow(
+                    user_id,house_id,order_info
+                );
                 //Book_buttonActionPerformed(evt);
             }
         });
 
         Map_house.setText("Locate in Map");
 
-        House_no.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        House_no.setText("W123");
+        house_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        house_name.setText("N/A");
 
-        Houserate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Houserate.setText("Rate per day");
+        house_rate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        house_rate.setText("Cost per day: N/A");
         try{
         BufferedImage myPicture = ImageIO.read(new File("src\\util\\images\\sample_house.jpg"));
         house_image.setIcon(new javax.swing.ImageIcon(myPicture)); // NOI18N
         house_image.setText("jLabel4");
-        }catch(Exception e) {System.out.println("Image not available");}
+        }catch(Exception e) {house_image.setText("Image not available");}
 
         Accessory_heading.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Accessory_heading.setText("Accessories in house: ");
@@ -99,8 +109,8 @@ public class HouseInfoWindow extends javax.swing.JFrame {
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addGap(28, 28, 28)
                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                        .addComponent(House_no, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(Houserate, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                                                        .addComponent(house_name, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(house_rate, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                                 .addContainerGap(168, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -114,9 +124,9 @@ public class HouseInfoWindow extends javax.swing.JFrame {
                                                 .addComponent(house_image, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGap(67, 67, 67)
-                                                .addComponent(House_no, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(house_name, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(Houserate, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(house_rate, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(Map_house)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
@@ -132,11 +142,6 @@ public class HouseInfoWindow extends javax.swing.JFrame {
 
         pack();
     }
-
-    /*private void Book_buttonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-        order_summary Order_window = new order_summary();
-    }*/
 
     public static void main(String args[]) {
         try {
@@ -164,16 +169,16 @@ public class HouseInfoWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration
-    private javax.swing.JTextArea AccessoryList;
-    private javax.swing.JLabel Accessory_heading;
-    private javax.swing.JButton Book_button;
-    private javax.swing.JTextArea Distances_list;
-    private javax.swing.JLabel House_no;
-    private javax.swing.JLabel Houserate;
-    private javax.swing.JButton Map_house;
-    private javax.swing.JLabel house_image;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    public javax.swing.JTextArea AccessoryList;
+    public javax.swing.JLabel Accessory_heading;
+    public javax.swing.JButton Book_button;
+    public javax.swing.JTextArea Distances_list;
+    public javax.swing.JLabel house_name;
+    public javax.swing.JLabel house_rate;
+    public javax.swing.JButton Map_house;
+    public javax.swing.JLabel house_image;
+    public javax.swing.JLabel jLabel1;
+    public javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JScrollPane jScrollPane3;
 }
 

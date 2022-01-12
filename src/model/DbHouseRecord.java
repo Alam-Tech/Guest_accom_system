@@ -65,6 +65,7 @@ public class DbHouseRecord {
         ArrayList<Object> result_data = new ArrayList<Object>();
         ResultSet query_result = DbInterface.fetch_table(query);
         try{
+            query_result.next();
             result_data.add(query_result.getString("name"));
             result_data.add(query_result.getDouble("price_per_day"));
 
@@ -76,10 +77,10 @@ public class DbHouseRecord {
             if(query_result.getInt("KT") == 1) acc.add("Kitchen");
             result_data.add(acc);
 
-            Double[] distances = {
-                query_result.getDouble("dist_SP"),
-                query_result.getDouble("dist_G"),
-                query_result.getDouble("dist_MG")
+            Integer[] distances = {
+                query_result.getInt("dist_SP"),
+                query_result.getInt("dist_G"),
+                query_result.getInt("dist_MG")
             };
             result_data.add(distances);
         }catch(Exception e){

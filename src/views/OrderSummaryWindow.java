@@ -3,21 +3,22 @@ package views;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import model.OrderInfo;
+import controller.OrderSummaryController;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+import model.OrderInfo;
+
 public class OrderSummaryWindow extends JFrame {
     
     public OrderSummaryWindow(int user_id,int house_id,OrderInfo order_info){
-        // int user_id,int house_id,OrderInfo order_info
         initComponents();
+        OrderSummaryController.fill_details(this, user_id, house_id, order_info);
         setVisible(true);
     }
 
     private void initComponents(){
-
         Bill_heading = new javax.swing.JLabel();
         house_image = new javax.swing.JLabel();
         house_name = new javax.swing.JLabel();

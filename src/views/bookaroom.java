@@ -13,7 +13,6 @@ import model.DbInterface;
 import model.OrderInfo;
 
 public class Bookaroom extends JFrame implements ActionListener{
-
     JLabel bath,date,op,nop,nor,pref,toh,nos;
     public ButtonGroup house_type,attach_bath;
     public JComboBox<String> num_people,days;
@@ -25,11 +24,12 @@ public class Bookaroom extends JFrame implements ActionListener{
     private int user_id;
 
     public Bookaroom(int user_id){
+        setBackground(new java.awt.Color(204, 204, 204));
         this.user_id = user_id;
         setTitle("Book a Room");
         house_type = new ButtonGroup();
         attach_bath = new ButtonGroup();
-        
+
         nop = new JLabel("No of People:");
         nop.setFont(new Font("Tahoma", Font.PLAIN, 12));
         add(nop);
@@ -58,7 +58,7 @@ public class Bookaroom extends JFrame implements ActionListener{
         add(no);
         no.setBounds(210, 70, 70, 21);
         
-        pref = new JLabel("Preferrable Facilities:");
+        pref = new JLabel("Preferable Facilities:");
         pref.setFont(new Font("Tahoma", Font.PLAIN, 12));
         add(pref);
         pref.setBounds(50, 130, 110, 15);
@@ -184,6 +184,22 @@ public class Bookaroom extends JFrame implements ActionListener{
 
     public static void main(String args[]){
         DbInterface.initialize();
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         Bookaroom sample_win = new Bookaroom(1);
     }
 }

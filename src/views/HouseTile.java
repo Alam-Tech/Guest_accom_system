@@ -53,7 +53,7 @@ public class HouseTile extends JPanel{
             
             JLabel cpd = new JLabel("Cost per day: Rs."+price);
             cpd.setFont(new Font("Tahoma", Font.PLAIN, 18));
-            cpd.setBounds(290, 100, 190, 48);
+            cpd.setBounds(290, 100, 250, 48);
             add(cpd);
             
             JButton loc_btn = new JButton("Open Location in Map");

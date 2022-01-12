@@ -5,8 +5,10 @@ import java.awt.*;
 
 class Success_dialogue extends javax.swing.JDialog
 {
-    public Success_dialogue(String Transaction_id, PaymentWindow window)
-    {
+    public Success_dialogue(String Transaction_id, PaymentWindow window){
+        super((Window)null);
+        setModal(true);
+
         setLayout(null);
         setSize(330,230);
         JLabel success_message=new JLabel("The transaction was successful!");
@@ -33,8 +35,10 @@ class Success_dialogue extends javax.swing.JDialog
 
 class failure_dialogue extends javax.swing.JDialog
 {
-    public failure_dialogue(String Transaction_id)
-    {
+    public failure_dialogue(String Transaction_id){
+        super((Window)null);
+        setModal(true);
+
         setLayout(null);
         setSize(330,230);
         JLabel failure_message=new JLabel("The transaction has failed!");
@@ -58,14 +62,17 @@ class failure_dialogue extends javax.swing.JDialog
     }
 }
 
-public class PaymentWindow extends javax.swing.JFrame {
+public class PaymentWindow extends javax.swing.JDialog {
 
     public PaymentWindow() {
+        super((Window)null);
+        setModal(true);
+
         initComponents();
         setVisible(true);
     }
+    
     private void initComponents() {
-
         cc_text = new javax.swing.JLabel();
         credit_card_choose = new javax.swing.JComboBox<>();
         card_no_prompt = new javax.swing.JLabel();
