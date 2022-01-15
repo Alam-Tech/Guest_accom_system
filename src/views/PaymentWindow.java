@@ -1,11 +1,40 @@
 package views;
 
 import javax.swing.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 import controller.PaymentController;
 import model.OrderInfo;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 import java.awt.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Properties;
+
+final class LengthRestrictedDocument extends PlainDocument {
+
+    private final int limit;
+
+    public LengthRestrictedDocument(int limit) {
+        this.limit = limit;
+    }
+
+    @Override
+    public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
+
+        if (str == null)
+            return;
+
+        if ((getLength() + str.length()) <= limit) {
+            super.insertString(offs, str, a);
+        }
+    }
+}
 
 class Success_dialogue extends javax.swing.JDialog
 {
@@ -95,7 +124,6 @@ public class PaymentWindow extends javax.swing.JDialog {
         cvv_input = new javax.swing.JTextField();
         expiry_label = new javax.swing.JLabel();
         pay_button = new javax.swing.JButton();
-        dateString_input = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -113,9 +141,12 @@ public class PaymentWindow extends javax.swing.JDialog {
         card_no_prompt.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         card_no_prompt.setText("Card Number");
 
+        card_num_input.setDocument(new LengthRestrictedDocument(16));
+
         cvv_label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cvv_label.setText("CVV ");
 
+        cvv_input.setDocument(new LengthRestrictedDocument(3));
         cvv_input.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cvv_inputActionPerformed(evt);
@@ -125,6 +156,10 @@ public class PaymentWindow extends javax.swing.JDialog {
         expiry_label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         expiry_label.setText("Expiry Date");
 
+        UtilDateModel model = new org.jdatepicker.impl.UtilDateModel();
+        JDatePanelImpl datePanel = new org.jdatepicker.impl.JDatePanelImpl(model, new Properties());
+        datePicker = new JDatePickerImpl(datePanel,new DateLabelFormatter());
+        
         pay_button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         // String amount="1234";
         pay_button.setText("Pay Rs.0");
@@ -133,29 +168,59 @@ public class PaymentWindow extends javax.swing.JDialog {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 System.out.println("Payment Button clicked");
-                Boolean payment_result=true;//Do controller processing of payment here and return whether it succeeded
-                if(payment_result)
+                if(card_num_input.getText().length()<16)
                 {
-                    try {
-                        Success_dialogue dialog = new Success_dialogue("1234",this_window);
-                        dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-                        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-                        dialog.setVisible(true);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
+                    javax.swing.JDialog ccnum_fail= new JDialog();
+                    ccnum_fail.setLayout(null);
+                    JLabel fail_message=new JLabel("Credit Card number must be a 16 digit number");
+                    fail_message.setFont(new Font("Sans Serif",0, 15));
+                    fail_message.setBounds(20,2,350,50);
+                    ccnum_fail.add(fail_message);
+                    ccnum_fail.setSize(380,150);
+                    ccnum_fail.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                    ccnum_fail.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                    ccnum_fail.setVisible(true);
+                }
+                else if(cvv_input.getText().length()<3)
+                {
+                    javax.swing.JDialog cvv_fail= new JDialog();
+                    cvv_fail.setLayout(null);
+                    JLabel fail_message=new JLabel("CVV must be a 3 digit number");
+                    fail_message.setFont(new Font("Sans Serif",0, 15));
+                    fail_message.setBounds(50,2,300,50);
+                    cvv_fail.add(fail_message);
+                    cvv_fail.setSize(325,150);
+                    cvv_fail.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                    cvv_fail.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                    cvv_fail.setVisible(true);
                 }
                 else
                 {
-                    try {
-                        failure_dialogue dialog = new failure_dialogue("1234");
-                        dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-                        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-                        dialog.setVisible(true);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
+                    Boolean payment_result=true;//Do controller processing of payment here and return whether it succeeded
+                    if(payment_result)
+                    {
+                        try {
+                            Success_dialogue dialog = new Success_dialogue("1234",this_window);
+                            dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                            dialog.setVisible(true);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                    else
+                    {
+                        try {
+                            failure_dialogue dialog = new failure_dialogue("1234");
+                            dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                            dialog.setVisible(true);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
                     }
                 }
+
             }
         });
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -177,7 +242,7 @@ public class PaymentWindow extends javax.swing.JDialog {
                                                 .addComponent(card_num_input, javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(credit_card_choose, javax.swing.GroupLayout.Alignment.LEADING, 0, 149, Short.MAX_VALUE)
                                                 .addComponent(cvv_input, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(dateString_input, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -198,7 +263,7 @@ public class PaymentWindow extends javax.swing.JDialog {
                                 .addGap(34, 34, 34)
                                 .addComponent(expiry_label)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(dateString_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                                 .addComponent(pay_button)
                                 .addGap(41, 41, 41))
@@ -213,9 +278,9 @@ public class PaymentWindow extends javax.swing.JDialog {
 
     private void cvv_inputActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }
+        }
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws Exception {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -232,12 +297,15 @@ public class PaymentWindow extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(PaymentWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
-        // java.awt.EventQueue.invokeLater(new Runnable() {
-        //     public void run() {
-        //         new PaymentWindow();
-        //     }
-        // });
+        OrderInfo info = new OrderInfo();
+        info.num_days_of_stay = 1;
+        info.num_people = 1;
+        info.date_of_accomodation =new SimpleDateFormat("dd/mm/yyyy").parse("11/11/1111");
+         java.awt.EventQueue.invokeLater(new Runnable() {
+             public void run() {
+                 new PaymentWindow(1,1,info);
+             }
+         });
     }
 
     // Variables declaration - do not modify
@@ -248,6 +316,6 @@ public class PaymentWindow extends javax.swing.JDialog {
     public javax.swing.JLabel expiry_label;
     public javax.swing.JTextField card_num_input;
     public javax.swing.JTextField cvv_input;
-    public javax.swing.JTextField dateString_input;
     public javax.swing.JButton pay_button;
+    public JDatePickerImpl datePicker;
 }
