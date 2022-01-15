@@ -13,6 +13,7 @@ public class HouseInfoWindow extends javax.swing.JFrame {
     private int user_id,house_id;
     private OrderInfo order_info;
     public HouseInfoWindow(int user_id,int house_id,OrderInfo order_info) {
+        setResizable(false);
         initComponents();
         HouseInfoController.fill_details(this, house_id);
         

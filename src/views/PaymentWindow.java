@@ -1,6 +1,10 @@
 package views;
 
 import javax.swing.*;
+
+import controller.PaymentController;
+import model.OrderInfo;
+
 import java.awt.*;
 
 class Success_dialogue extends javax.swing.JDialog
@@ -63,12 +67,22 @@ class failure_dialogue extends javax.swing.JDialog
 }
 
 public class PaymentWindow extends javax.swing.JDialog {
+    private int user_id,house_id;
+    private OrderInfo order_info;
 
-    public PaymentWindow() {
+    public PaymentWindow(int user_id,int house_id,OrderInfo order_info) {
         super((Window)null);
         setModal(true);
 
+        this.user_id = user_id;
+        this.house_id = house_id;
+        this.order_info = order_info;
+
+        setTitle("Perform Bank Transaction");
+        setResizable(false);
         initComponents();
+        PaymentController.fill_details(this, house_id);
+
         setVisible(true);
     }
     
@@ -112,8 +126,8 @@ public class PaymentWindow extends javax.swing.JDialog {
         expiry_label.setText("Expiry Date");
 
         pay_button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        String amount="1234";
-        pay_button.setText("Pay "+amount);
+        // String amount="1234";
+        pay_button.setText("Pay Rs.0");
         PaymentWindow this_window=this;
         pay_button.addActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -219,21 +233,21 @@ public class PaymentWindow extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(PaymentWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PaymentWindow();
-            }
-        });
+        // java.awt.EventQueue.invokeLater(new Runnable() {
+        //     public void run() {
+        //         new PaymentWindow();
+        //     }
+        // });
     }
 
     // Variables declaration - do not modify
-    private javax.swing.JLabel card_no_prompt;
-    private javax.swing.JLabel cc_text;
-    private javax.swing.JComboBox<String> credit_card_choose;
-    private javax.swing.JLabel cvv_label;
-    private javax.swing.JLabel expiry_label;
-    private javax.swing.JTextField card_num_input;
-    private javax.swing.JTextField cvv_input;
-    private javax.swing.JTextField dateString_input;
-    private javax.swing.JButton pay_button;
+    public javax.swing.JLabel card_no_prompt;
+    public javax.swing.JLabel cc_text;
+    public javax.swing.JComboBox<String> credit_card_choose;
+    public javax.swing.JLabel cvv_label;
+    public javax.swing.JLabel expiry_label;
+    public javax.swing.JTextField card_num_input;
+    public javax.swing.JTextField cvv_input;
+    public javax.swing.JTextField dateString_input;
+    public javax.swing.JButton pay_button;
 }

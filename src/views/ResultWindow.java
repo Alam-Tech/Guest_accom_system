@@ -14,6 +14,7 @@ public class ResultWindow extends JFrame{
     private int i;
     
     public ResultWindow(int user_id,ArrayList<Object[]> house_tray,OrderInfo order_info) {
+        setResizable(false);
         setBackground(new java.awt.Color(204, 204, 204));
         setTitle("Results");
         p1 = new JPanel();

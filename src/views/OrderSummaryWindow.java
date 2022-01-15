@@ -2,17 +2,21 @@ package views;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import controller.OrderSummaryController;
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+import controller.OrderSummaryController;
 import model.OrderInfo;
 
 public class OrderSummaryWindow extends JFrame {
-    
+    private int user_id,house_id;
+    private OrderInfo order_info;
     public OrderSummaryWindow(int user_id,int house_id,OrderInfo order_info){
+        this.user_id = user_id;
+        this.house_id = house_id;
+        this.order_info = order_info;
+
+        setResizable(false);
         initComponents();
         OrderSummaryController.fill_details(this, user_id, house_id, order_info);
         setVisible(true);
@@ -28,7 +32,7 @@ public class OrderSummaryWindow extends JFrame {
         ppl_count = new javax.swing.JLabel();
         booking_date = new javax.swing.JLabel();
         booked_by_label = new javax.swing.JLabel();
-        Bill_id = new javax.swing.JLabel();
+        //Bill_id = new javax.swing.JLabel();
         payment_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -64,15 +68,15 @@ public class OrderSummaryWindow extends JFrame {
         booked_by_label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         booked_by_label.setText("Booked By: \"username\"");
 
-        Bill_id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Bill_id.setText("Bill ID: 19932");
+        // Bill_id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        // Bill_id.setText("Bill ID: 19932");
 
         payment_button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         payment_button.setText("Make Payment");
         payment_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //payment_buttonActionPerformed(evt);
-                PaymentWindow new_window= new PaymentWindow();
+                PaymentWindow new_window= new PaymentWindow(user_id,house_id,order_info);
             }
         });
 
@@ -93,7 +97,7 @@ public class OrderSummaryWindow extends JFrame {
                                                                         .addComponent(Price)))
                                                         .addComponent(Bill_heading)
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                                .addComponent(Bill_id, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                // .addComponent(Bill_id, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                                 .addComponent(booked_by_label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                                 .addComponent(accom_date, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
                                                                 .addComponent(days_of_stay, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -128,7 +132,7 @@ public class OrderSummaryWindow extends JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(booked_by_label)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Bill_id)
+                                // .addComponent(Bill_id)
                                 .addGap(37, 37, 37)
                                 .addComponent(payment_button)
                                 .addContainerGap(39, Short.MAX_VALUE))
@@ -136,11 +140,6 @@ public class OrderSummaryWindow extends JFrame {
 
         pack();
     }
-
-    // private void payment_buttonActionPerformed(java.awt.event.ActionEvent evt) {
-    //     // TODO add your handling code here:
-    //     Payment_window new_window= new Payment_window();
-    // }
 
     public static void main(String args[]) {
         try {
@@ -170,7 +169,7 @@ public class OrderSummaryWindow extends JFrame {
 
     // Variables declaration
     public javax.swing.JLabel Bill_heading;
-    public javax.swing.JLabel Bill_id;
+    // public javax.swing.JLabel Bill_id;
     public javax.swing.JLabel Price;
     public javax.swing.JLabel accom_date;
     public javax.swing.JLabel booked_by_label;

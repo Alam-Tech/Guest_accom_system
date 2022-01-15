@@ -9,6 +9,7 @@ import java.util.Properties;
 import org.jdatepicker.impl.*;
 
 import controller.BookaroomController;
+import model.BillManager;
 import model.DbInterface;
 import model.OrderInfo;
 
@@ -24,6 +25,7 @@ public class Bookaroom extends JFrame implements ActionListener{
     private int user_id;
 
     public Bookaroom(int user_id){
+        setResizable(false);
         setBackground(new java.awt.Color(204, 204, 204));
         this.user_id = user_id;
         setTitle("Book a Room");
@@ -183,7 +185,9 @@ public class Bookaroom extends JFrame implements ActionListener{
     }
 
     public static void main(String args[]){
-        DbInterface.initialize();
+        boolean db_init = DbInterface.initialize();
+        boolean bill_init = BillManager.initialize();
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -200,6 +204,12 @@ public class Bookaroom extends JFrame implements ActionListener{
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        Bookaroom sample_win = new Bookaroom(1);
+        if(!db_init) System.out.println("DB Initialisation failed!");
+        else if(!bill_init) System.out.println("Bill Manager initialisation failed!");
+        else{
+            Bookaroom sample_win = new Bookaroom(1);
+            // BillManager.save_state();
+            // System.out.println("State saved!");
+        }
     }
 }

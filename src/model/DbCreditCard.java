@@ -7,7 +7,7 @@ public class DbCreditCard {
      * This function is to fetch data to validate the credit card credentials.
      * @param card_type Company of credit card Ex: VISA, MasterCard
      * @param card_num 16- digit credit card number
-     * @return An object array with cvv(String) and expiry(Date).
+     * @return An object array with cvv(String),expiry(Date),balance(double).
      * Null is returned if no data/ error.
      */
     public static Object[] get_credit_card_detail(String card_type,String card_num){
@@ -18,7 +18,8 @@ public class DbCreditCard {
             if(query_result.next()){
                 result_data = new Object[]{
                     query_result.getString("cvv"),
-                    query_result.getDate("expiry")
+                    query_result.getDate("expiry"),
+                    query_result.getDouble("balance")
                 };
             }
         }catch(Exception e){

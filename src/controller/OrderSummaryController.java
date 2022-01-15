@@ -1,13 +1,13 @@
 package controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 import model.DbClient;
 import model.DbHouseRecord;
 import model.OrderInfo;
 import views.OrderSummaryWindow;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
 
 public class OrderSummaryController {
     public static void fill_details(
