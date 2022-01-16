@@ -208,8 +208,6 @@ public class Bookaroom extends JFrame implements ActionListener{
         else if(!bill_init) System.out.println("Bill Manager initialisation failed!");
         else{
             Bookaroom sample_win = new Bookaroom(1);
-            // BillManager.save_state();
-            // System.out.println("State saved!");
         }
     }
 }

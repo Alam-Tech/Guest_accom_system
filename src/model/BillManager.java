@@ -53,7 +53,7 @@ public class BillManager {
         try{
             FileOutputStream out = new FileOutputStream("bill_log.txt");
             ObjectOutputStream writer = new ObjectOutputStream(out);
-            writer.writeInt(0);
+            writer.writeInt(123);
             writer.close();
             out.close();
         }catch(Exception e){ 

@@ -5,7 +5,7 @@ package model;
 // import java.text.SimpleDateFormat;
 
 public class DbBookings {
-    private static int bill_no = 1234;
+    // private static int bill_no = 1234;
 
     /**
      * This function is to register a succesful booking in DB
@@ -20,14 +20,14 @@ public class DbBookings {
      * @return True if the record was succesfully inserted in the Db, else false.
      */
     public static boolean make_booking(
-        int house_id,int num_members,String start_date,
+        int bill_id,int house_id,int num_members,String start_date,
         String end_date,int num_stay_days,String status,
         boolean paid,int booked_by
     ){
         String query = "insert into bookings values(";
 
         query += String.format("'%d','%d','%d','%d',to_date('%s','dd-mm-yyyy'),",
-                 ++DbBookings.bill_no,house_id,booked_by,num_members,start_date);
+                 bill_id,house_id,booked_by,num_members,start_date);
         query += String.format("to_date('%s','dd-mm-yyyy'),%d,'%s',%d)",
                  end_date,num_stay_days,status,(paid?1:0));
         int result = -1;

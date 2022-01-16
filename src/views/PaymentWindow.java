@@ -36,12 +36,13 @@ final class LengthRestrictedDocument extends PlainDocument {
     }
 }
 
-class Success_dialogue extends javax.swing.JDialog
-{
+class Success_dialogue extends javax.swing.JDialog{
     public Success_dialogue(String Transaction_id, PaymentWindow window){
         super((Window)null);
         setModal(true);
 
+        setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setLayout(null);
         setSize(330,230);
         JLabel success_message=new JLabel("The transaction was successful!");
@@ -63,23 +64,27 @@ class Success_dialogue extends javax.swing.JDialog
         add(success_message);
         add(print_id);
         add(ok);
+        
+        setVisible(true);
     }
 }
 
-class failure_dialogue extends javax.swing.JDialog
-{
-    public failure_dialogue(String Transaction_id){
+class failure_dialogue extends javax.swing.JDialog{
+    public failure_dialogue(String message){
         super((Window)null);
         setModal(true);
 
+        setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setLayout(null);
         setSize(330,230);
         JLabel failure_message=new JLabel("The transaction has failed!");
         failure_message.setBounds(20,20,300,30);
         failure_message.setFont(new Font("Sans Serif",Font.PLAIN,18));
-        JLabel print_id=new JLabel("Transaction ID: "+Transaction_id);
-        print_id.setBounds(70,70,200,30);
-        print_id.setFont(new Font("Sans Serif",Font.PLAIN,18));
+        JLabel reason=new JLabel(message);
+        reason.setForeground(Color.RED.darker());
+        reason.setBounds(70,70,200,30);
+        reason.setFont(new Font("Sans Serif",Font.PLAIN,18));
         JButton ok=new JButton("Go Back");
         ok.setBounds(100,120,100,30);
         ok.addActionListener(new java.awt.event.ActionListener() {
@@ -90,8 +95,10 @@ class failure_dialogue extends javax.swing.JDialog
             }
         });
         add(failure_message);
-        add(print_id);
+        add(reason);
         add(ok);
+
+        setVisible(true);
     }
 }
 
@@ -194,31 +201,43 @@ public class PaymentWindow extends javax.swing.JDialog {
                     cvv_fail.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
                     cvv_fail.setVisible(true);
                 }
-                else
-                {
-                    Boolean payment_result=true;//Do controller processing of payment here and return whether it succeeded
-                    if(payment_result)
-                    {
-                        try {
-                            Success_dialogue dialog = new Success_dialogue("1234",this_window);
-                            dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-                            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-                            dialog.setVisible(true);
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
+                else{
+                    int payment_result = PaymentController.handle_payment(PaymentWindow.this, house_id, user_id, order_info);
+                    if(payment_result >=1 && payment_result <= 5){
+                        // Payment Failed.
+                        String error_message = "";
+                        if(payment_result == 1) error_message = "Card doesn't exist";
+                        else if(payment_result == 2) error_message = "CVV not correct!";
+                        else if(payment_result == 3) error_message = "expiry date incorrect!";
+                        else if(payment_result == 4) error_message = "Insufficient balance!";
+                        else error_message = "Error while processing!";
+
+                        failure_dialogue popup = new failure_dialogue(error_message);
+                    }else{
+                        Success_dialogue popup = new Success_dialogue(String.valueOf(payment_result), this_window);
                     }
-                    else
-                    {
-                        try {
-                            failure_dialogue dialog = new failure_dialogue("1234");
-                            dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-                            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-                            dialog.setVisible(true);
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-                    }
+                    // Boolean payment_result=true;//Do controller processing of payment here and return whether it succeeded
+                //     if(payment_result){
+                //         try {
+                //             Success_dialogue dialog = new Success_dialogue("1234",this_window);
+                //             dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                //             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                //             dialog.setVisible(true);
+                //         } catch (Exception ex) {
+                //             ex.printStackTrace();
+                //         }
+                //     }
+                //     else
+                //     {
+                //         try {
+                //             failure_dialogue dialog = new failure_dialogue("1234");
+                //             dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                //             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                //             dialog.setVisible(true);
+                //         } catch (Exception ex) {
+                //             ex.printStackTrace();
+                //         }
+                //     }
                 }
 
             }
