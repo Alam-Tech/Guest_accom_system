@@ -11,18 +11,18 @@ import model.OrderInfo;
 public class OrderSummaryWindow extends JFrame {
     private int user_id,house_id;
     private OrderInfo order_info;
-    public OrderSummaryWindow(int user_id,int house_id,OrderInfo order_info){
+    public OrderSummaryWindow(int user_id,int house_id,OrderInfo order_info, HouseInfoWindow house_window, ResultWindow result_window){
         this.user_id = user_id;
         this.house_id = house_id;
         this.order_info = order_info;
 
         setResizable(false);
-        initComponents();
-        OrderSummaryController.fill_details(this, user_id, house_id, order_info);
+        initComponents(house_window, result_window);
+        //OrderSummaryController.fill_details(this, user_id, house_id, order_info);
         setVisible(true);
     }
 
-    private void initComponents(){
+    private void initComponents(HouseInfoWindow house_window, ResultWindow result_window){
         Bill_heading = new javax.swing.JLabel();
         house_image = new javax.swing.JLabel();
         house_name = new javax.swing.JLabel();
@@ -67,7 +67,7 @@ public class OrderSummaryWindow extends JFrame {
 
         booked_by_label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         booked_by_label.setText("Booked By: \"username\"");
-
+        OrderSummaryWindow order_window= this;
         // Bill_id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         // Bill_id.setText("Bill ID: 19932");
 
@@ -76,7 +76,7 @@ public class OrderSummaryWindow extends JFrame {
         payment_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //payment_buttonActionPerformed(evt);
-                PaymentWindow new_window= new PaymentWindow(user_id,house_id,order_info);
+                PaymentWindow new_window= new PaymentWindow(user_id,house_id,order_info, order_window, house_window, result_window);
             }
         });
 

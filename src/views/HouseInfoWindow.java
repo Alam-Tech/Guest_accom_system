@@ -12,19 +12,19 @@ import model.OrderInfo;
 public class HouseInfoWindow extends javax.swing.JFrame {
     private int user_id,house_id;
     private OrderInfo order_info;
-    public HouseInfoWindow(int user_id,int house_id,OrderInfo order_info) {
+    public HouseInfoWindow(int user_id,int house_id,OrderInfo order_info, ResultWindow result) {
         setResizable(false);
-        initComponents();
-        HouseInfoController.fill_details(this, house_id);
+        initComponents(result);
+        //HouseInfoController.fill_details(this, house_id);
         
         this.user_id = user_id;
         this.house_id = house_id;
         this.order_info = order_info;
-        
+
         setVisible(true);
     }
 
-    private void initComponents() {
+    private void initComponents(ResultWindow result) {
         Book_button = new javax.swing.JButton();
         Map_house = new javax.swing.JButton();
         house_name = new javax.swing.JLabel();
@@ -40,13 +40,14 @@ public class HouseInfoWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
 
+        HouseInfoWindow house_window = this;
         Book_button.setText("Book Now");
         Book_button.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //System.out.println("Button clicked");
                 OrderSummaryWindow Order_window = new OrderSummaryWindow(
-                    user_id,house_id,order_info
+                    user_id,house_id,order_info, house_window, result
                 );
                 //Book_buttonActionPerformed(evt);
             }
@@ -164,7 +165,7 @@ public class HouseInfoWindow extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new House_info_window().setVisible(true);
+                new HouseInfoWindow(1,1,null,null).setVisible(true);
             }
         });
     }

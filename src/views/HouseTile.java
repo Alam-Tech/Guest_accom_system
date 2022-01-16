@@ -14,7 +14,7 @@ public class HouseTile extends JPanel{
     public int id;
     public HouseTile(int id,String name,double price,
                      String photo_name,int user_id,
-                     OrderInfo order_info){
+                     OrderInfo order_info, ResultWindow result){
         this.id = id;
         setLayout(null);
         setBackground(Color.WHITE);
@@ -66,7 +66,7 @@ public class HouseTile extends JPanel{
                 public void actionPerformed(ActionEvent e){
                     //Action to open the billing window
                     OrderSummaryWindow sum_win = new OrderSummaryWindow(user_id, 
-                    id, order_info);
+                    id, order_info, null, result);
                 }
             });
             buy_btn.setBounds(600, 40, 100, 40);
@@ -77,8 +77,7 @@ public class HouseTile extends JPanel{
             MouseListener ml = new MouseAdapter(){
                 @Override
                 public void mousePressed(MouseEvent e){
-                    HouseInfoWindow info_win = new HouseInfoWindow(user_id, 
-                                                id, order_info); 
+                    HouseInfoWindow info_win = new HouseInfoWindow(user_id, id, order_info, result);
                 }
             };
             addMouseListener(ml);

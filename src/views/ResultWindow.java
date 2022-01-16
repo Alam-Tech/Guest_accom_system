@@ -44,7 +44,7 @@ public class ResultWindow extends JFrame{
             HouseTile temp = new HouseTile(
                 (Integer)house_tray.get(i)[0], (String)house_tray.get(i)[1], 
                 (Double)house_tray.get(i)[2],(String)house_tray.get(i)[3],
-                user_id, order_info);
+                user_id, order_info,this);
             p2.add(temp);
         }
         cp.add(p1, BorderLayout.NORTH);
@@ -64,13 +64,13 @@ public class ResultWindow extends JFrame{
                  }
              }
          } catch (ClassNotFoundException ex) {
-             java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+             java.util.logging.Logger.getLogger(bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
          } catch (InstantiationException ex) {
-             java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+             java.util.logging.Logger.getLogger(bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
          } catch (IllegalAccessException ex) {
-             java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+             java.util.logging.Logger.getLogger(bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
          } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-             java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+             java.util.logging.Logger.getLogger(bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
          }
          //ResultWindow sample_win = new ResultWindow();
      }

@@ -37,7 +37,7 @@ final class LengthRestrictedDocument extends PlainDocument {
 }
 
 class Success_dialogue extends javax.swing.JDialog{
-    public Success_dialogue(String Transaction_id, PaymentWindow window){
+    public Success_dialogue(String Transaction_id, PaymentWindow pay_window, OrderSummaryWindow order_window, HouseInfoWindow house_window, ResultWindow result_window){
         super((Window)null);
         setModal(true);
 
@@ -58,7 +58,13 @@ class Success_dialogue extends javax.swing.JDialog{
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 dispose();
-                window.dispose();
+                pay_window.dispose();
+                order_window.dispose();
+                try{
+                    house_window.dispose();
+                }
+                catch (Exception e) {System.out.println("User has entered payment directly from HouseTile");}
+                result_window.dispose();
             }
         });
         add(success_message);
@@ -106,7 +112,7 @@ public class PaymentWindow extends javax.swing.JDialog {
     private int user_id,house_id;
     private OrderInfo order_info;
 
-    public PaymentWindow(int user_id,int house_id,OrderInfo order_info) {
+    public PaymentWindow(int user_id,int house_id,OrderInfo order_info, OrderSummaryWindow order_window, HouseInfoWindow house_window, ResultWindow result_window) {
         super((Window)null);
         setModal(true);
 
@@ -116,13 +122,13 @@ public class PaymentWindow extends javax.swing.JDialog {
 
         setTitle("Perform Bank Transaction");
         setResizable(false);
-        initComponents();
-        PaymentController.fill_details(this, house_id);
+        initComponents(order_window, house_window, result_window);
+        //PaymentController.fill_details(this, house_id);
 
         setVisible(true);
     }
     
-    private void initComponents() {
+    private void initComponents(OrderSummaryWindow order_window, HouseInfoWindow house_window, ResultWindow result_window) {
         cc_text = new javax.swing.JLabel();
         credit_card_choose = new javax.swing.JComboBox<>();
         card_no_prompt = new javax.swing.JLabel();
@@ -202,7 +208,7 @@ public class PaymentWindow extends javax.swing.JDialog {
                     cvv_fail.setVisible(true);
                 }
                 else{
-                    int payment_result = PaymentController.handle_payment(PaymentWindow.this, house_id, user_id, order_info);
+                    int payment_result = 6;//PaymentController.handle_payment(PaymentWindow.this, house_id, user_id, order_info);
                     if(payment_result >=1 && payment_result <= 5){
                         // Payment Failed.
                         String error_message = "";
@@ -214,7 +220,7 @@ public class PaymentWindow extends javax.swing.JDialog {
 
                         failure_dialogue popup = new failure_dialogue(error_message);
                     }else{
-                        Success_dialogue popup = new Success_dialogue(String.valueOf(payment_result), this_window);
+                        Success_dialogue popup = new Success_dialogue(String.valueOf(payment_result), this_window, order_window, house_window, result_window);
                     }
                     // Boolean payment_result=true;//Do controller processing of payment here and return whether it succeeded
                 //     if(payment_result){
@@ -322,7 +328,7 @@ public class PaymentWindow extends javax.swing.JDialog {
         info.date_of_accomodation =new SimpleDateFormat("dd/mm/yyyy").parse("11/11/1111");
          java.awt.EventQueue.invokeLater(new Runnable() {
              public void run() {
-                 new PaymentWindow(1,1,info);
+                 new PaymentWindow(1,1,info,null,null,null);
              }
          });
     }
