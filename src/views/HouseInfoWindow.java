@@ -15,7 +15,7 @@ public class HouseInfoWindow extends javax.swing.JFrame {
     public HouseInfoWindow(int user_id,int house_id,OrderInfo order_info, ResultWindow result) {
         setResizable(false);
         initComponents(result);
-        //HouseInfoController.fill_details(this, house_id);
+        HouseInfoController.fill_details(this, house_id);
         
         this.user_id = user_id;
         this.house_id = house_id;

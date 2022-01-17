@@ -89,6 +89,27 @@ public class DbHouseRecord {
         return result_data;
     }
 
+    /**
+     * This funtion to set the is_free column in the house_record table, after a house is booked.
+     * @param house_id The id of the target house.
+     * @return True if the update was successful, else false.
+     */
+    public static boolean book_house(int house_id){
+        String query = String.format("update house_record set is_free = 0 where id = %d",house_id);
+        int result = DbInterface.update_row(query);
+        return result == 1;
+    }
+
+    /**
+     * This function is to set the is_free column in the house_record table when a room is vacated.
+     * @param house_id The id of the target house
+     * @return True if the update was successful, else false.
+     */
+    public static boolean free_house(int house_id){
+        String query = String.format("update house_record set is_free = 1 where id = %d",house_id);
+        int result = DbInterface.update_row(query);
+        return result == 1;
+    }
 
     // public static void main(String args[]){
     //     DbInterface.initialize();

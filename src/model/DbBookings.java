@@ -1,9 +1,5 @@
 package model;
 
-// import java.sql.*;
-// import java.text.DateFormat;
-// import java.text.SimpleDateFormat;
-
 public class DbBookings {
     // private static int bill_no = 1234;
 
@@ -11,10 +7,10 @@ public class DbBookings {
      * This function is to register a succesful booking in DB
      * @param house_id id of the house
      * @param num_members Number of members staing in the house
-     * @param start_date String format of the date of accomodation
-     * @param end_date String formate of the date of vacation.
+     * @param start_date String format of the date of accomodation.(dd-mm-yyyy)
+     * @param end_date String formate of the date of vacation.(dd-mm-yyyy)
      * @param num_stay_days number of days of stay.
-     * @param status 'conf' or 'canc'
+     * @param status 'confirmed' or 'cancelled'
      * @param paid Is all the money paid?
      * @param booked_by User name of te user who booked the house
      * @return True if the record was succesfully inserted in the Db, else false.

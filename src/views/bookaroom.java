@@ -9,6 +9,7 @@ import java.util.Properties;
 import org.jdatepicker.impl.*;
 
 import controller.BookaroomController;
+import controller.PurposeSelector;
 import model.BillManager;
 import model.DbInterface;
 import model.OrderInfo;
@@ -179,7 +180,8 @@ public class Bookaroom extends JFrame implements ActionListener{
             // System.out.println(order_info.date_of_accomodation.toString());
             // System.out.println(order_info.num_people);
             // System.out.println(order_info.num_days_of_stay);
-            ResultWindow next = new ResultWindow(user_id,result,order_info);
+            ResultWindow next = new ResultWindow(PurposeSelector.Purpose.Booking,user_id,
+                                                 result,order_info);
             
         }
     }

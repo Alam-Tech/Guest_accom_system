@@ -18,7 +18,7 @@ public class OrderSummaryWindow extends JFrame {
 
         setResizable(false);
         initComponents(house_window, result_window);
-        //OrderSummaryController.fill_details(this, user_id, house_id, order_info);
+        OrderSummaryController.fill_details(this, user_id, house_id, order_info);
         setVisible(true);
     }
 

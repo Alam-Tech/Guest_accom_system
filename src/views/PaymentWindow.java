@@ -4,17 +4,15 @@ import javax.swing.*;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
+import java.awt.*;
+import java.text.SimpleDateFormat;
+import java.util.Properties;
 
 import controller.PaymentController;
 import model.OrderInfo;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
-
-import java.awt.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Properties;
 
 final class LengthRestrictedDocument extends PlainDocument {
 
@@ -37,7 +35,9 @@ final class LengthRestrictedDocument extends PlainDocument {
 }
 
 class Success_dialogue extends javax.swing.JDialog{
-    public Success_dialogue(String Transaction_id, PaymentWindow pay_window, OrderSummaryWindow order_window, HouseInfoWindow house_window, ResultWindow result_window){
+    public Success_dialogue(String Transaction_id, PaymentWindow pay_window,
+                            OrderSummaryWindow order_window, HouseInfoWindow house_window,
+                            ResultWindow result_window){
         super((Window)null);
         setModal(true);
 
@@ -123,7 +123,7 @@ public class PaymentWindow extends javax.swing.JDialog {
         setTitle("Perform Bank Transaction");
         setResizable(false);
         initComponents(order_window, house_window, result_window);
-        //PaymentController.fill_details(this, house_id);
+        PaymentController.fill_details(this, house_id);
 
         setVisible(true);
     }
@@ -145,11 +145,11 @@ public class PaymentWindow extends javax.swing.JDialog {
 
         credit_card_choose.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         credit_card_choose.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MasterCard", "IndusInd", "Standard Chartered", "ICICI", "VISA" }));
-        credit_card_choose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                credit_card_chooseActionPerformed(evt);
-            }
-        });
+        // credit_card_choose.addActionListener(new java.awt.event.ActionListener() {
+        //     public void actionPerformed(java.awt.event.ActionEvent evt) {
+        //         credit_card_chooseActionPerformed(evt);
+        //     }
+        // });
 
         card_no_prompt.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         card_no_prompt.setText("Card Number");
@@ -160,11 +160,11 @@ public class PaymentWindow extends javax.swing.JDialog {
         cvv_label.setText("CVV ");
 
         cvv_input.setDocument(new LengthRestrictedDocument(3));
-        cvv_input.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cvv_inputActionPerformed(evt);
-            }
-        });
+        // cvv_input.addActionListener(new java.awt.event.ActionListener() {
+        //     public void actionPerformed(java.awt.event.ActionEvent evt) {
+        //         cvv_inputActionPerformed(evt);
+        //     }
+        // });
 
         expiry_label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         expiry_label.setText("Expiry Date");
@@ -208,7 +208,7 @@ public class PaymentWindow extends javax.swing.JDialog {
                     cvv_fail.setVisible(true);
                 }
                 else{
-                    int payment_result = 6;//PaymentController.handle_payment(PaymentWindow.this, house_id, user_id, order_info);
+                    int payment_result = PaymentController.handle_payment(PaymentWindow.this, house_id, user_id, order_info);
                     if(payment_result >=1 && payment_result <= 5){
                         // Payment Failed.
                         String error_message = "";
@@ -296,14 +296,6 @@ public class PaymentWindow extends javax.swing.JDialog {
 
         pack();
     }
-
-    private void credit_card_chooseActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void cvv_inputActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-        }
 
     public static void main(String args[]) throws Exception {
         try {

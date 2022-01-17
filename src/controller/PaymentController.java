@@ -48,8 +48,8 @@ public class PaymentController {
         if(!cvv.equals(details[0])) return 2;
         //Checking if the date is correct:
         String str_expiry_date = formatter.format(expiry_date);
-        System.out.println("The str version of expiry date: "+str_expiry_date);
-        System.out.println("The str version of date obtained from db: "+formatter.format(details[1]));
+        // System.out.println("The str version of expiry date: "+str_expiry_date);
+        // System.out.println("The str version of date obtained from db: "+formatter.format(details[1]));
         if(!str_expiry_date.equals(formatter.format(details[1]))) return 3;
         //If not enough balance:
         if((double)details[2] < amount) return 4;
@@ -63,13 +63,16 @@ public class PaymentController {
             cal.setTime(order_info.date_of_accomodation);
             cal.add(Calendar.DATE,order_info.num_days_of_stay);
             String end_date = formatter.format(cal.getTime());
-            System.out.println("The start date: "+start_date);
-            System.out.println("The end date: "+end_date);
+            // System.out.println("The start date: "+start_date);
+            // System.out.println("The end date: "+end_date);
 
             boolean booked = DbBookings.make_booking(bill_num, house_id, order_info.num_people,
              start_date, end_date, order_info.num_days_of_stay, 
              "confirmed", true, user_id);
-            if(!booked) return 5;
+            
+            boolean updated = DbHouseRecord.book_house(house_id);
+
+            if(!booked || !updated) return 5;
         }else return 5; 
         BillManager.save_state();
         return bill_num;

@@ -5,11 +5,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-class AfterLoginGui extends JFrame implements ActionListener{
+import controller.PurposeSelector.Purpose;
+
+public class AfterLogin extends JFrame implements ActionListener{
+    private int user_id;
     JLabel x,y;
     JButton br,yb,cb,pb,lo;
     String username = "User";
-    AfterLoginGui(){
+    AfterLogin(int user_id){
+        this.user_id = user_id;
         setTitle("After Login");
         x = new JLabel("Welcome "+username);
         x.setBounds(20,20,500,50);
@@ -19,14 +23,17 @@ class AfterLoginGui extends JFrame implements ActionListener{
         y.setBounds(50,50,500,50);
         y.setFont(new Font("Tahoma", Font.PLAIN, 15));
         add(y);
+
         br = new JButton("Book a Room");
         br.setBounds(140, 90, 130, 30);
         br.setFont(new Font("Tahoma", Font.PLAIN, 15));
         add(br);
+
         yb = new JButton("Your Bookings");
         yb.setBounds(140, 130, 130, 30);
         yb.setFont(new Font("Tahoma", Font.PLAIN, 15));
         add(yb);
+
         cb = new JButton("Cancel Booking");
         cb.setBounds(140, 170, 130, 30);
         cb.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -63,6 +70,9 @@ class AfterLoginGui extends JFrame implements ActionListener{
         if(e.getSource()==yb){
             //your booking
             dispose();
+            //Fetch house_tray using controller:
+            // ResultWindow result_win = new ResultWindow(Purpose.ViewActiveBooking, user_id,
+            //                                            house_tray, null);
         }
         if(e.getSource()==cb){
             //cancel booking
@@ -73,28 +83,25 @@ class AfterLoginGui extends JFrame implements ActionListener{
             dispose();
         }
     }
-}
 
-public class AfterLogin {
     public static void main(String[] args) {
 
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    try {
-                        UIManager.setLookAndFeel(info.getClassName());
-                    } catch (ClassNotFoundException e) {
-                        System.out.println("Error!!! "+e);
-                    } catch (InstantiationException e) {
-                        System.out.println("Error!!! "+e);
-                    } catch (IllegalAccessException e) {
-                        System.out.println("Error!!! "+e);
-                    } catch (UnsupportedLookAndFeelException e) {
-                        System.out.println("Error!!! "+e);
-                    }
-                    break;
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                try {
+                    UIManager.setLookAndFeel(info.getClassName());
+                } catch (ClassNotFoundException e) {
+                    System.out.println("Error!!! "+e);
+                } catch (InstantiationException e) {
+                    System.out.println("Error!!! "+e);
+                } catch (IllegalAccessException e) {
+                    System.out.println("Error!!! "+e);
+                } catch (UnsupportedLookAndFeelException e) {
+                    System.out.println("Error!!! "+e);
                 }
+                break;
             }
-
-        AfterLoginGui g = new AfterLoginGui();
+        }
+        AfterLogin g = new AfterLogin(1);
     }
 }
