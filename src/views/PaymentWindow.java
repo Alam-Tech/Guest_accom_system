@@ -13,6 +13,8 @@ import model.OrderInfo;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
+import views.popups.SuccessDialog;
+import views.popups.FailureDialog;
 
 final class LengthRestrictedDocument extends PlainDocument {
 
@@ -34,79 +36,6 @@ final class LengthRestrictedDocument extends PlainDocument {
     }
 }
 
-class Success_dialogue extends javax.swing.JDialog{
-    public Success_dialogue(String Transaction_id, PaymentWindow pay_window,
-                            OrderSummaryWindow order_window, HouseInfoWindow house_window,
-                            ResultWindow result_window){
-        super((Window)null);
-        setModal(true);
-
-        setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        setLayout(null);
-        setSize(330,230);
-        JLabel success_message=new JLabel("The transaction was successful!");
-        success_message.setBounds(20,20,300,30);
-        success_message.setFont(new Font("Sans Serif",Font.PLAIN,18));
-        JLabel print_id=new JLabel("Transaction ID: "+Transaction_id);
-        print_id.setBounds(70,70,200,30);
-        print_id.setFont(new Font("Sans Serif",Font.PLAIN,18));
-        JButton ok=new JButton("Done");
-        ok.setBounds(100,120,100,30);
-        ok.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                dispose();
-                pay_window.dispose();
-                order_window.dispose();
-                try{
-                    house_window.dispose();
-                }
-                catch (Exception e) {System.out.println("User has entered payment directly from HouseTile");}
-                result_window.dispose();
-            }
-        });
-        add(success_message);
-        add(print_id);
-        add(ok);
-        
-        setVisible(true);
-    }
-}
-
-class failure_dialogue extends javax.swing.JDialog{
-    public failure_dialogue(String message){
-        super((Window)null);
-        setModal(true);
-
-        setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        setLayout(null);
-        setSize(330,230);
-        JLabel failure_message=new JLabel("The transaction has failed!");
-        failure_message.setBounds(20,20,300,30);
-        failure_message.setFont(new Font("Sans Serif",Font.PLAIN,18));
-        JLabel reason=new JLabel(message);
-        reason.setForeground(Color.RED.darker());
-        reason.setBounds(70,70,200,30);
-        reason.setFont(new Font("Sans Serif",Font.PLAIN,18));
-        JButton ok=new JButton("Go Back");
-        ok.setBounds(100,120,100,30);
-        ok.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                dispose();
-            }
-        });
-        add(failure_message);
-        add(reason);
-        add(ok);
-
-        setVisible(true);
-    }
-}
 
 public class PaymentWindow extends javax.swing.JDialog {
     private int user_id,house_id;
@@ -218,9 +147,9 @@ public class PaymentWindow extends javax.swing.JDialog {
                         else if(payment_result == 4) error_message = "Insufficient balance!";
                         else error_message = "Error while processing!";
 
-                        failure_dialogue popup = new failure_dialogue(error_message);
+                        FailureDialog popup = new FailureDialog(error_message);
                     }else{
-                        Success_dialogue popup = new Success_dialogue(String.valueOf(payment_result), this_window, order_window, house_window, result_window);
+                        SuccessDialog popup = new SuccessDialog(String.valueOf(payment_result), this_window, order_window, house_window, result_window);
                     }
                     // Boolean payment_result=true;//Do controller processing of payment here and return whether it succeeded
                 //     if(payment_result){
