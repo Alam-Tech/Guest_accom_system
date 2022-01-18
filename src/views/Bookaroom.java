@@ -51,6 +51,7 @@ public class Bookaroom extends JFrame implements ActionListener
         toh.setBounds(50, 60, 90, 40);
 
         el = new JRadioButton("Elite");
+        el.setSelected(true);
         el.setActionCommand("elite");
         house_type.add(el);
         add(el);
@@ -128,6 +129,7 @@ public class Bookaroom extends JFrame implements ActionListener
         bath.setBounds(50, 490, 190, 20);
 
         s = new JRadioButton("Yes");
+        s.setSelected(true);
         s.setActionCommand("yes");
         attach_bath.add(s);
         add(s);
