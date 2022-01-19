@@ -151,30 +151,7 @@ public class PaymentWindow extends javax.swing.JDialog {
                     }else{
                         SuccessDialog popup = new SuccessDialog(String.valueOf(payment_result), this_window, order_window, house_window, result_window);
                     }
-                    // Boolean payment_result=true;//Do controller processing of payment here and return whether it succeeded
-                //     if(payment_result){
-                //         try {
-                //             Success_dialogue dialog = new Success_dialogue("1234",this_window);
-                //             dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-                //             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-                //             dialog.setVisible(true);
-                //         } catch (Exception ex) {
-                //             ex.printStackTrace();
-                //         }
-                //     }
-                //     else
-                //     {
-                //         try {
-                //             failure_dialogue dialog = new failure_dialogue("1234");
-                //             dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-                //             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-                //             dialog.setVisible(true);
-                //         } catch (Exception ex) {
-                //             ex.printStackTrace();
-                //         }
-                //     }
                 }
-
             }
         });
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

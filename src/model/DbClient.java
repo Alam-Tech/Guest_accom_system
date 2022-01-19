@@ -32,7 +32,7 @@ public class DbClient {
      * Null is returned if there is no data/error.
      */
     public static Object[] get_user(String user_name){
-        String query = "select * from client_record where user_name = "+user_name;
+        String query = "select * from client_record where user_name = '"+user_name+"'";
         ResultSet rs = DbInterface.fetch_table(query);
         Object[] result_data = null;
         try{

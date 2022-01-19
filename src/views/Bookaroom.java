@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+// import java.text.DateFormat;
+// import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
@@ -13,7 +13,7 @@ import org.jdatepicker.impl.*;
 
 import controller.BookaroomController;
 import controller.PurposeSelector.Purpose;
-import model.DbInterface;
+// import model.DbInterface;
 import model.OrderInfo;
 
 public class Bookaroom extends JFrame implements ActionListener
@@ -29,6 +29,8 @@ public class Bookaroom extends JFrame implements ActionListener
     private int user_id;
 
     public Bookaroom(int user_id){
+        setUI();
+        setResizable(false);
         setBackground(new java.awt.Color(204, 204, 204));
         this.user_id = user_id;
         setTitle("Book a Room");
@@ -195,8 +197,7 @@ public class Bookaroom extends JFrame implements ActionListener
         }
     }
 
-    public static void main(String args[]){
-        DbInterface.initialize();
+    private void setUI(){
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -213,6 +214,11 @@ public class Bookaroom extends JFrame implements ActionListener
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        Bookaroom sample_win = new Bookaroom(1);
+    }
+
+    public static void main(String args[]){
+        // DbInterface.initialize();
+        
+        // Bookaroom sample_win = new Bookaroom(1);
     }
 }

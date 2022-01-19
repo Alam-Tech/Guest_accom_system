@@ -8,19 +8,22 @@ import java.util.*;
 
 import controller.AfterLoginController;
 import controller.PurposeSelector.Purpose;
-import model.BillManager;
-import model.DbInterface;
+// import model.BillManager;
+// import model.DbInterface;
 
 public class AfterLogin extends JFrame implements ActionListener{
     private AfterLoginController controller = new AfterLoginController();
     private int user_id;
     JLabel x,y;
     JButton br,yb,cb,pb,lo;
-    String username = "User";
-    AfterLogin(int user_id){
+    // String username = "User";
+    public AfterLogin(String user_name,int user_id){
+        setUI();
         this.user_id = user_id;
         setTitle("After Login");
-        x = new JLabel("Welcome "+username);
+        setResizable(false);
+
+        x = new JLabel("Welcome "+user_name);
         x.setBounds(20,20,500,50);
         x.setFont(new Font("Tahoma", Font.BOLD, 20));
         add(x);
@@ -66,6 +69,7 @@ public class AfterLogin extends JFrame implements ActionListener{
         if(e.getSource()==lo){
             //LOGOUT
             dispose();
+            LoginWindow login_win = new LoginWindow();
         }
         if(e.getSource()==br){
             //Book a room
@@ -95,8 +99,7 @@ public class AfterLogin extends JFrame implements ActionListener{
         }
     }
 
-    public static void main(String[] args) {
-
+    private void setUI(){
         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
             if ("Nimbus".equals(info.getName())) {
                 try {
@@ -113,13 +116,18 @@ public class AfterLogin extends JFrame implements ActionListener{
                 break;
             }
         }
-        boolean db_connected = DbInterface.initialize();
-        boolean bill_manager_connected = BillManager.initialize();
-        DbInterface.update_tables(1);
-        if(!db_connected) System.out.println("DB Initialisation failed!");
-        else if(!bill_manager_connected) System.out.println("Bill Manager intiialisation failed!");
-        else{
-            AfterLogin g = new AfterLogin(1);
-        }
+    }
+
+    public static void main(String[] args) {
+
+        
+        // boolean db_connected = DbInterface.initialize();
+        // boolean bill_manager_connected = BillManager.initialize();
+        // // DbInterface.update_tables(1);
+        // if(!db_connected) System.out.println("DB Initialisation failed!");
+        // else if(!bill_manager_connected) System.out.println("Bill Manager intiialisation failed!");
+        // else{
+        //     AfterLogin g = new AfterLogin("Cool Guy",1);
+        // }
     }
 }
