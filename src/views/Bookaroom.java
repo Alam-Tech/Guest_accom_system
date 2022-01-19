@@ -173,6 +173,7 @@ public class Bookaroom extends JFrame implements ActionListener
         search_btn.addActionListener(this);
     }
     public void actionPerformed(ActionEvent e) {
+        long day = 1000 * 60 * 60 * 24;
         if(e.getSource()==click){
             int people_count = Integer.parseInt((String) num_people.getSelectedItem());
             int room_count = people_count / 2;
@@ -182,7 +183,7 @@ public class Bookaroom extends JFrame implements ActionListener
         if(e.getSource()==search_btn){
             Date date = (Date)datePicker.getModel().getValue();
             Date sysdate = new java.util.Date();
-            if(date ==null || date.compareTo(sysdate)<0){
+            if(date ==null || date.compareTo(new Date(sysdate.getTime() - day))<0){
                 date_error.setVisible(true);
             }else{
                 date_error.setVisible(false);
