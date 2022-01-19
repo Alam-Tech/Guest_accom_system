@@ -73,19 +73,22 @@ public class ResultWindow extends JFrame{
             cp.add(sp, BorderLayout.CENTER);
 
             for (i = 0; i < house_tray.size(); i++) {
-                if(purpose == Purpose.Booking){
-                    HouseTile temp = new HouseTile(
-                        (Integer)house_tray.get(i)[0], (String)house_tray.get(i)[1], 
-                        (Double)house_tray.get(i)[2],(String)house_tray.get(i)[3],
-                        user_id, order_info,this);
-                    p2.add(temp);
-                }else if(purpose == Purpose.ViewActiveBooking){
+                // if(purpose == Purpose.Booking){
+                //     // HouseTile temp = new HouseTile(
+                //     //     (Integer)house_tray.get(i)[0], (String)house_tray.get(i)[1], 
+                //     //     (Double)house_tray.get(i)[2],(String)house_tray.get(i)[3],
+                //     //     user_id, order_info,this);
+                //     // p2.add(temp);
+                // }else if(purpose == Purpose.ViewActiveBooking){
 
-                }else if(purpose == Purpose.ViewPrevBooking){
+                // }else if(purpose == Purpose.ViewPrevBooking){
 
-                }else if(purpose == Purpose.CancelBooking){
+                // }else if(purpose == Purpose.CancelBooking){
 
-                }
+                // }
+                HouseTile temp = new HouseTile(purpose,house_tray.get(i),
+                                               user_id,order_info,this);
+                p2.add(temp);
             }
         }
 

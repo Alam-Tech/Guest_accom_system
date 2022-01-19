@@ -8,14 +8,22 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.border.LineBorder;
 
+import controller.HouseTileController;
+import controller.PurposeSelector.Purpose;
 import model.OrderInfo;
+import views.popups.ConfirmCancel;
 
 public class HouseTile extends JPanel{
-    public int id;
-    public HouseTile(int id,String name,double price,
-                     String photo_name,int user_id,
+    private int id;
+    private ResultWindow parent_win;
+    // public HouseTile(int id,String name,double price,
+    //                  String photo_name,int user_id,
+    //                  OrderInfo order_info, ResultWindow result){
+    public HouseTile(Purpose purpose,Object[] data_tray,int user_id,
                      OrderInfo order_info, ResultWindow result){
-        this.id = id;
+        this.id = (Integer)data_tray[0];
+        this.parent_win = result;
+
         setLayout(null);
         setBackground(Color.WHITE);
         setPreferredSize(new Dimension(800, 100));
@@ -35,14 +43,14 @@ public class HouseTile extends JPanel{
             //if(bookaroom.el.isSelected())
                 //h1 = new JLabel("ELITE HOUSE "+i);
             //else
-            JLabel h1 = new JLabel(name);
+            JLabel h1 = new JLabel((String)data_tray[1]);
             h1.setFont(new Font("Tahoma", Font.PLAIN, 24));
             h1.setBounds(290, 30, 171, 62);
             add(h1);
 
             JLabel pic;
             try{
-                BufferedImage myPicture = ImageIO.read(new File("src\\util\\images\\"+photo_name));
+                BufferedImage myPicture = ImageIO.read(new File("src\\util\\images\\"+data_tray[3]));
                 pic = new JLabel(new ImageIcon(myPicture));
             }
             catch(Exception e) {
@@ -51,35 +59,73 @@ public class HouseTile extends JPanel{
             pic.setBounds(20, 30, 250, 250);
             add(pic);
             
-            JLabel cpd = new JLabel("Cost per day: Rs."+price);
+            JLabel cpd = new JLabel("");
+            if(purpose == Purpose.Booking){
+                cpd = new JLabel("Cost per day: Rs."+data_tray[2]);
+            }else{
+                cpd = new JLabel(data_tray[4]+" to "+data_tray[5]);
+            }
             cpd.setFont(new Font("Tahoma", Font.PLAIN, 18));
             cpd.setBounds(290, 100, 250, 48);
             add(cpd);
             
-            JButton loc_btn = new JButton("Open Location in Map");
-            loc_btn.setBounds(290, 170, 171, 39);
-            add(loc_btn);
+            if(purpose == Purpose.Booking){
+                JButton loc_btn = new JButton("Open Location in Map");
+                loc_btn.setBounds(290, 170, 171, 39);
+                add(loc_btn);
+            }else{
+                JLabel member_label = new JLabel(data_tray[2]+" members");
+                member_label.setFont(new Font("Tahoma", Font.PLAIN, 14));
+                member_label.setBounds(290,170,150,30);  
+                add(member_label);
+            }
 
-            
-            JButton buy_btn = new JButton("Buy Now");
-            buy_btn.addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent e){
-                    //Action to open the billing window
-                    OrderSummaryWindow sum_win = new OrderSummaryWindow(user_id, 
-                    id, order_info, null, result);
-                }
-            });
-            buy_btn.setBounds(600, 40, 100, 40);
-            add(buy_btn);
+            if(purpose == Purpose.Booking){
+                JButton buy_btn = new JButton("Buy Now");
+                buy_btn.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e){
+                        //Action to open the billing window
+                        OrderSummaryWindow sum_win = new OrderSummaryWindow(user_id, 
+                        id, order_info, null, result);
+                    }
+                });
+                buy_btn.setBounds(600, 40, 100, 40);
+                add(buy_btn);
+
+                MouseListener ml = new MouseAdapter(){
+                    @Override
+                    public void mousePressed(MouseEvent e){
+                        HouseInfoWindow info_win = new HouseInfoWindow(user_id, id, order_info, result);
+                    }
+                };
+                addMouseListener(ml);
+            }else if(purpose == Purpose.CancelBooking){
+                JButton cancel_btn = new JButton("Cancel");
+                cancel_btn.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e){
+                        HouseTileController controller = new HouseTileController();
+                        
+                        ConfirmCancel popup = new ConfirmCancel();
+                        int result = controller.handle_cancel(popup, id);
+                        if(result == 1 || result == -1){
+                            parent_win.dispose();
+                            if(result == 1) System.out.println("The cancellation was succesful!");
+                            else System.out.println("The cancellation wasn't succesful!");
+                        }
+                        System.out.println("Delete button pressed");
+                    }
+                });
+                cancel_btn.setBounds(600, 40, 100, 40);
+                add(cancel_btn);
+            }else{
+                JLabel status_msg = new JLabel("Status: "+data_tray[6]);
+                status_msg.setFont(new Font("Sans Serif",Font.BOLD,16));
+                status_msg.setBounds(600,40,150,30);
+                add(status_msg);
+            }
             
             setBorder(new LineBorder(Color.BLACK,2));
 
-            MouseListener ml = new MouseAdapter(){
-                @Override
-                public void mousePressed(MouseEvent e){
-                    HouseInfoWindow info_win = new HouseInfoWindow(user_id, id, order_info, result);
-                }
-            };
-            addMouseListener(ml);
+            
         }
 }

@@ -1,9 +1,29 @@
 package model;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
+import java.util.*;
+import java.util.Date;
+
+import controller.AfterLoginController;
 
 public class DbInterface {
     private static Connection con;
+    private static DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+
+    private static int compare_dates(String former,String latter){
+        try{
+            Date former_date = formatter.parse(former);
+            Date latter_date = formatter.parse(latter);
+            if(former_date.before(latter_date)) return -1;
+            else if(latter_date.before(former_date)) return 1;
+            else return 0;
+        }catch(Exception e){
+            System.out.println("Exception occured in compare_dates(): "+e);
+            return -2;
+        }
+    }
 
     private static void commit(){
         try{
@@ -23,6 +43,19 @@ public class DbInterface {
         return rs;
     }
 
+    private static void update_tables(int user_id){
+        ArrayList<Object[]> active_bookings = new AfterLoginController().get_active_bookings(user_id);
+        String today = formatter.format(new Date()); 
+
+        for(Object[] element:active_bookings){
+            if(element[6].equals("confirmed") && compare_dates(today, (String)element[5]) == 1){
+                boolean updated = DbBookings.cancel_booking((Integer)element[0], false);
+                if(!updated) System.out.println("Couldn't update bill no: "+element[0]);
+            }
+            System.out.println("Booking tables updated for user id: "+user_id);
+        }
+    }
+    
     public static boolean initialize(){
         try{
             Class.forName("oracle.jdbc.driver.OracleDriver");

@@ -4,10 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
 
+import controller.AfterLoginController;
 import controller.PurposeSelector.Purpose;
+import model.BillManager;
+import model.DbInterface;
 
 public class AfterLogin extends JFrame implements ActionListener{
+    private AfterLoginController controller = new AfterLoginController();
     private int user_id;
     JLabel x,y;
     JButton br,yb,cb,pb,lo;
@@ -64,23 +69,29 @@ public class AfterLogin extends JFrame implements ActionListener{
         }
         if(e.getSource()==br){
             //Book a room
-            dispose();
-            Bookaroom b = new Bookaroom(1);
+            //dispose();
+            Bookaroom b = new Bookaroom(user_id);
         }
         if(e.getSource()==yb){
             //your booking
-            dispose();
-            //Fetch house_tray using controller:
-            // ResultWindow result_win = new ResultWindow(Purpose.ViewActiveBooking, user_id,
-            //                                            house_tray, null);
+            //dispose();
+            ArrayList<Object[]> active_bookings = controller.get_active_bookings(user_id);
+            ResultWindow result_win = new ResultWindow(Purpose.ViewActiveBooking, user_id,
+                                                       active_bookings, null);
         }
         if(e.getSource()==cb){
             //cancel booking
-            System.exit(0);
+            ArrayList<Object[]> active_bookings = controller.get_active_bookings(user_id);
+            ResultWindow result_win = new ResultWindow(Purpose.CancelBooking, user_id,
+                                                       active_bookings, null);
+            //System.exit(0);
         }
         if(e.getSource()==pb){
             //previous booking
-            dispose();
+            ArrayList<Object[]> prev_bookings = controller.get_previous_bookings(user_id);
+            ResultWindow result_win = new ResultWindow(Purpose.ViewPrevBooking, user_id,
+                                                       prev_bookings, null);
+            //dispose();
         }
     }
 
@@ -102,6 +113,12 @@ public class AfterLogin extends JFrame implements ActionListener{
                 break;
             }
         }
-        AfterLogin g = new AfterLogin(1);
+        boolean db_connected = DbInterface.initialize();
+        boolean bill_manager_connected = BillManager.initialize();
+        if(!db_connected) System.out.println("DB Initialisation failed!");
+        else if(!bill_manager_connected) System.out.println("Bill Manager intiialisation failed!");
+        else{
+            AfterLogin g = new AfterLogin(1);
+        }
     }
 }

@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class ConfirmCancel extends javax.swing.JDialog
 {
-    String Choice;
+    public String Choice = "no";
     public ConfirmCancel()
     {
         super((Window)null);
@@ -22,9 +22,8 @@ public class ConfirmCancel extends javax.swing.JDialog
         yes.setBounds(50,70,100,30);
         yes.addActionListener(new java.awt.event.ActionListener() {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                Choice="Yes";
+            public void actionPerformed(java.awt.event.ActionEvent evt){
+                Choice="yes";
                 dispose();
             }
         });
@@ -33,9 +32,8 @@ public class ConfirmCancel extends javax.swing.JDialog
         no.setBounds(180,70,100,30);
         no.addActionListener(new java.awt.event.ActionListener() {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                Choice="No";
+            public void actionPerformed(java.awt.event.ActionEvent evt){
+                Choice="no";
                 dispose();
             }
         });
