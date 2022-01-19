@@ -12,6 +12,7 @@ import java.util.Properties;
 import org.jdatepicker.impl.*;
 
 import controller.BookaroomController;
+import controller.PurposeSelector.Purpose;
 import model.DbInterface;
 import model.OrderInfo;
 
@@ -98,11 +99,11 @@ public class Bookaroom extends JFrame implements ActionListener
         datePicker.setBounds(190,320,200,30);
         add(datePicker);
 
-        date_error = new JLabel("Wrong Date!! Choose a future date");
+        date_error = new JLabel("Choose a valid date!");
         date_error.setFont(new Font("Tahoma", Font.BOLD, 12));
         date_error.setForeground(new java.awt.Color(255, 0, 0));
         add(date_error);
-        date_error.setBounds(100, 360, 210, 30);
+        date_error.setBounds(200, 355, 210, 30);
         date_error.setVisible(false);
 
         nos = new JLabel("No of days of stay:");
@@ -181,14 +182,13 @@ public class Bookaroom extends JFrame implements ActionListener
         if(e.getSource()==search_btn){
             Date date = (Date)datePicker.getModel().getValue();
             Date sysdate = new java.util.Date();
-            if(date.compareTo(sysdate)<0){
+            if(date ==null || date.compareTo(sysdate)<0){
                 date_error.setVisible(true);
-            }
-            else{
+            }else{
                 date_error.setVisible(false);
                 ArrayList<Object[]> result = BookaroomController.search(Bookaroom.this);
                 OrderInfo order_info = BookaroomController.get_order_info(Bookaroom.this);
-                ResultWindow next = new ResultWindow(user_id,result,order_info);
+                ResultWindow next = new ResultWindow(Purpose.Booking,user_id,result,order_info);
                 //dispose();
             }
         }

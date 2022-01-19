@@ -43,19 +43,19 @@ public class DbInterface {
         return rs;
     }
 
-    private static void update_tables(int user_id){
+    public static void update_tables(int user_id){
         ArrayList<Object[]> active_bookings = new AfterLoginController().get_active_bookings(user_id);
         String today = formatter.format(new Date()); 
 
         for(Object[] element:active_bookings){
             if(element[6].equals("confirmed") && compare_dates(today, (String)element[5]) == 1){
-                boolean updated = DbBookings.cancel_booking((Integer)element[0], false);
+                boolean updated = DbBookings.cancel_booking((Integer)element[0], true);
                 if(!updated) System.out.println("Couldn't update bill no: "+element[0]);
             }
-            System.out.println("Booking tables updated for user id: "+user_id);
         }
+        System.out.println("Booking tables updated for user id: "+user_id);
     }
-    
+
     public static boolean initialize(){
         try{
             Class.forName("oracle.jdbc.driver.OracleDriver");
