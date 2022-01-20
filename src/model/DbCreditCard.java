@@ -5,13 +5,12 @@ import java.sql.*;
 public class DbCreditCard {
     /**
      * This function is to fetch data to validate the credit card credentials.
-     * @param card_type Company of credit card Ex: VISA, MasterCard
      * @param card_num 16- digit credit card number
      * @return An object array with cvv(String),expiry(Date),balance(double).
      * Null is returned if no data/ error.
      */
-    public static Object[] get_credit_card_detail(String card_type,String card_num){
-        String query = "select * from credit_card_record where card_type = '"+card_type+"' and card_number = '"+card_num+"'";
+    public static Object[] get_credit_card_detail(String card_num){
+        String query = "select * from credit_card_record where card_number = '"+card_num+"'";
         ResultSet query_result = DbInterface.fetch_table(query);
         Object[] result_data = null;
         try{

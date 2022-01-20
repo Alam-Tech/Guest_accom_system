@@ -74,7 +74,7 @@ public class AfterLogin extends JFrame implements ActionListener{
         if(e.getSource()==br){
             //Book a room
             //dispose();
-            Bookaroom b = new Bookaroom(user_id);
+            Bookaroom pref_win = new Bookaroom(user_id);
         }
         if(e.getSource()==yb){
             //your booking

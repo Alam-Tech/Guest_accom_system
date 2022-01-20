@@ -11,6 +11,7 @@ import javax.swing.border.LineBorder;
 import controller.HouseTileController;
 import controller.PurposeSelector.Purpose;
 import model.OrderInfo;
+import views.popups.CancelationPopup;
 import views.popups.ConfirmCancel;
 
 public class HouseTile extends JPanel{
@@ -107,12 +108,27 @@ public class HouseTile extends JPanel{
                         
                         ConfirmCancel popup = new ConfirmCancel();
                         int result = controller.handle_cancel(popup, id);
-                        if(result == 1 || result == -1){
+                        if(result > 0){
+                            boolean is_positive = false;
+                            String message = "Dummy message";
+                            if(result == 1) message = "No Booking record as such!";
+                            else if(result == 2) message = "Cancellation not permitted!";
+                            else if(result == 3) message = "Payment record doesnt't exist!";
+                            else if(result == 4) message = "Amount refunding failed!";
+                            else if(result == 5) message = "Unable to register refund transaction!";
+                            else if(result == 6){
+                                is_positive = true;
+                                message = "Succesfully cancelled, amount refuded!";
+                            }
                             parent_win.dispose();
-                            if(result == 1) System.out.println("The cancellation was succesful!");
-                            else System.out.println("The cancellation wasn't succesful!");
+                            CancelationPopup pop = new CancelationPopup(is_positive, message);
                         }
-                        System.out.println("Delete button pressed");
+                        // if(result == 1 || result == -1){
+                        //     parent_win.dispose();
+                        //     if(result == 1) System.out.println("The cancellation was succesful!");
+                        //     else System.out.println("The cancellation wasn't succesful!");
+                        // }
+                        // System.out.println("Delete button pressed");
                     }
                 });
                 cancel_btn.setBounds(600, 40, 100, 40);

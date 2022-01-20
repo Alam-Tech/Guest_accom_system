@@ -87,4 +87,33 @@ public class DbBookings {
         }
         return false;
     }
+
+    /**
+     * To get the details of the booking:
+     * @param bill_id Target bill id.
+     * @return The Object[] with elements in order: house_id,booked_by,num_members,
+     * start_date,end_date,num_days,status,paid.
+     */
+    public static Object[] get_details(int bill_id){
+        Object[] result = null;
+        String query = "select * from bookings where id = "+bill_id;
+        ResultSet query_result = DbInterface.fetch_table(query);
+        try{
+            if(query_result.next()){
+                result = new Object[]{
+                    query_result.getString("house_id"),
+                    query_result.getInt("booked_by"),
+                    query_result.getInt("num_members"),
+                    query_result.getString("start_date"),
+                    query_result.getString("end_date"),
+                    query_result.getInt("num_days"),
+                    query_result.getString("status"),
+                    query_result.getInt("paid")
+                };
+            }
+        }catch(Exception e){
+            System.out.println("Exception in DbBookings -> get_details(): "+e);
+        }
+        return result;
+    }
 }

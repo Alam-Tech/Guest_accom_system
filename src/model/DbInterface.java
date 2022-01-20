@@ -12,7 +12,15 @@ public class DbInterface {
     private static Connection con;
     private static DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 
-    private static int compare_dates(String former,String latter){
+    /**
+     * To compare dates. Inout dates in the format: dd-MM-yyyy
+     * @param former
+     * @param latter
+     * @return -1 if former come before latter
+     * 1 if former comes after latter
+     * 0 - if former and latter are the same days.
+     */
+    public static int compare_dates(String former,String latter){
         try{
             Date former_date = formatter.parse(former);
             Date latter_date = formatter.parse(latter);

@@ -52,7 +52,7 @@ public class PaymentWindow extends javax.swing.JDialog {
         setTitle("Perform Bank Transaction");
         setResizable(false);
         initComponents(order_window, house_window, result_window);
-        PaymentController.fill_details(this, house_id);
+        PaymentController.fill_details(this, house_id,order_info);
 
         setVisible(true);
     }
