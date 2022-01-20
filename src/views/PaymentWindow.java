@@ -116,9 +116,10 @@ public class PaymentWindow extends javax.swing.JDialog {
                     ccnum_fail.setLayout(null);
                     JLabel fail_message=new JLabel("Credit Card number must be a 16 digit number");
                     fail_message.setFont(new Font("Sans Serif",0, 15));
+                    fail_message.setForeground(Color.red);
                     fail_message.setBounds(20,2,350,50);
                     ccnum_fail.add(fail_message);
-                    ccnum_fail.setSize(380,150);
+                    ccnum_fail.setSize(380,130);
                     ccnum_fail.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
                     ccnum_fail.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
                     ccnum_fail.setVisible(true);
@@ -129,12 +130,27 @@ public class PaymentWindow extends javax.swing.JDialog {
                     cvv_fail.setLayout(null);
                     JLabel fail_message=new JLabel("CVV must be a 3 digit number");
                     fail_message.setFont(new Font("Sans Serif",0, 15));
+                    fail_message.setForeground(Color.red);
                     fail_message.setBounds(50,2,300,50);
                     cvv_fail.add(fail_message);
-                    cvv_fail.setSize(325,150);
+                    cvv_fail.setSize(310,130);
                     cvv_fail.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
                     cvv_fail.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
                     cvv_fail.setVisible(true);
+                }
+                else if(datePicker.getModel().getValue()==null)
+                {
+                    javax.swing.JDialog no_date= new JDialog();
+                    no_date.setLayout(null);
+                    JLabel fail_message=new JLabel("Please select Expiry Date");
+                    fail_message.setFont(new Font("Sans Serif",0, 15));
+                    fail_message.setForeground(Color.red);
+                    fail_message.setBounds(50,2,300,50);
+                    no_date.add(fail_message);
+                    no_date.setSize(300,130);
+                    no_date.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                    no_date.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                    no_date.setVisible(true);
                 }
                 else{
                     int payment_result = PaymentController.handle_payment(PaymentWindow.this, house_id, user_id, order_info);
@@ -231,7 +247,7 @@ public class PaymentWindow extends javax.swing.JDialog {
          });
     }
 
-    // Variables declaration - do not modify
+    // Variables declaration
     public javax.swing.JLabel card_no_prompt;
     public javax.swing.JLabel cc_text;
     public javax.swing.JComboBox<String> credit_card_choose;
