@@ -41,12 +41,12 @@ public class OrderSummaryWindow extends JFrame {
         Bill_heading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Bill_heading.setText("Billing Information");
 
-        try{
-            BufferedImage myPicture = ImageIO.read(new File("src\\util\\images\\sample_house.jpg"));
-            house_image.setIcon(new javax.swing.ImageIcon(myPicture)); // NOI18N
-            house_image.setText("jLabel4");
-        }catch(Exception e) {System.out.println("Image not available");}
-        house_image.setText("jLabel1");
+        // try{
+        //     myPicture = ImageIO.read(new File("src\\util\\images\\sample_house.jpg"));
+        //     house_image.setIcon(new javax.swing.ImageIcon(myPicture)); // NOI18N
+        //     house_image.setText("jLabel4");
+        // }catch(Exception e) {System.out.println("Image not available");}
+        // house_image.setText("jLabel1");
 
         house_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         house_name.setText("House Name");
@@ -179,4 +179,5 @@ public class OrderSummaryWindow extends JFrame {
     public javax.swing.JLabel house_name;
     public javax.swing.JButton payment_button;
     public javax.swing.JLabel ppl_count;
+    public BufferedImage myPicture;
 }

@@ -57,7 +57,7 @@ public class DbHouseRecord {
     /**
      * This function is to fetch data for the HouseInfoWindow
      * @param house_id Id of the target house
-     * @return An array list with name,price_per_day,Accessories,Location details.
+     * @return An array list with name,price_per_day,Accessories,Location details,photo.
      * Location details order: Swimming pool, Gym, Main Gate. Empty list if no data.
      */
     public static ArrayList<Object> get_house(int house_id){
@@ -83,6 +83,7 @@ public class DbHouseRecord {
                 query_result.getInt("dist_MG")
             };
             result_data.add(distances);
+            result_data.add(query_result.getString("photo"));
         }catch(Exception e){
             System.out.println("Exceptio occured in get_house(): "+e);
         }

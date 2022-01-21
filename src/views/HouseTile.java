@@ -118,7 +118,7 @@ public class HouseTile extends JPanel{
                             else if(result == 5) message = "Unable to register refund transaction!";
                             else if(result == 6){
                                 is_positive = true;
-                                message = "Succesfully cancelled, amount refuded!";
+                                message = "Succesfully cancelled, amount refunded!";
                             }
                             parent_win.dispose();
                             CancelationPopup pop = new CancelationPopup(is_positive, message);

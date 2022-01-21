@@ -60,11 +60,12 @@ public class HouseInfoWindow extends javax.swing.JFrame {
 
         house_rate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         house_rate.setText("Cost per day: N/A");
-        try{
-        BufferedImage myPicture = ImageIO.read(new File("src\\util\\images\\sample_house.jpg"));
-        house_image.setIcon(new javax.swing.ImageIcon(myPicture)); // NOI18N
-        house_image.setText("jLabel4");
-        }catch(Exception e) {house_image.setText("Image not available");}
+        
+        // try{
+        // BufferedImage myPicture = ImageIO.read(new File("src\\util\\images\\sample_house.jpg"));
+        // house_image.setIcon(new javax.swing.ImageIcon(myPicture)); // NOI18N
+        // house_image.setText("jLabel4");
+        // }catch(Exception e) {house_image.setText("Image not available");}
 
         Accessory_heading.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Accessory_heading.setText("Accessories in house: ");
@@ -182,5 +183,6 @@ public class HouseInfoWindow extends javax.swing.JFrame {
     public javax.swing.JLabel jLabel1;
     public javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JScrollPane jScrollPane3;
+    public BufferedImage myPicture;
 }
 

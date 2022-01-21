@@ -20,7 +20,7 @@ public class AfterLogin extends JFrame implements ActionListener{
     public AfterLogin(String user_name,int user_id){
         setUI();
         this.user_id = user_id;
-        setTitle("After Login");
+        setTitle("Welcome!");
         setResizable(false);
 
         x = new JLabel("Welcome "+user_name);

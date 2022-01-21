@@ -28,7 +28,7 @@ public class ResultWindow extends JFrame{
         
         if(purpose == Purpose.Booking){
             setTitle("Results");
-            li = new JLabel("Available Rooms");
+            li = new JLabel("Available Houses");
         }else if(purpose == Purpose.ViewActiveBooking){
             setTitle("Active Bookings");
             li = new JLabel("Your current bookings");
