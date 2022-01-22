@@ -141,7 +141,5 @@ public class HouseTile extends JPanel{
             }
             
             setBorder(new LineBorder(Color.BLACK,2));
-
-            
         }
 }

@@ -46,5 +46,11 @@ public class DbClient {
             System.out.println("Exception occured in get_user(): "+e);
         }
         return result_data;
-    } 
+    }
+    
+    public static boolean add_user(int user_id,String user_name,String password){
+        String query = String.format("insert into client_record values(%d,'%s','%s')",user_id,user_name,password);
+        int inserted = DbInterface.insert_row(query);
+        return inserted == 1;
+    }
 }

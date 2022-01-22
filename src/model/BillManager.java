@@ -1,26 +1,13 @@
 package model;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
-public class BillManager {
+public class BillManager extends FileHandler {
     private static int bill_num = -1;
+    private static String file_name = "bill_log.txt";
 
     public static boolean initialize(){
-        if(bill_num != -1) return false;
-        try{
-            FileInputStream in = new FileInputStream("bill_log.txt");
-            ObjectInputStream reader = new ObjectInputStream(in);
-            bill_num = reader.readInt();
-            reader.close();
-            in.close();
-            return true;
-        }catch(Exception e){
-            System.out.println("Exception in initialize(): "+e);
-        }
-        return false;
+        if(bill_num != -1) return true;
+        bill_num = init_from_file(file_name);
+        return bill_num != -1;
     }
 
     public static int get_bill_number(){
@@ -32,17 +19,7 @@ public class BillManager {
             System.out.println("The bill number has not been initialised");
             return false;
         }
-        try{
-            FileOutputStream out = new FileOutputStream("bill_log.txt");
-            ObjectOutputStream writer = new ObjectOutputStream(out);
-            writer.writeInt(bill_num);
-            writer.close();
-            out.close();
-            return true;
-        }catch(Exception e){
-            System.out.println("Exception occured in save_state(): "+e);
-        }
-        return false;
+        return save_data(bill_num, file_name);
     }
 
     /**
@@ -50,14 +27,8 @@ public class BillManager {
      * @param args
      */
     public static void main(String args[]){
-        try{
-            FileOutputStream out = new FileOutputStream("bill_log.txt");
-            ObjectOutputStream writer = new ObjectOutputStream(out);
-            writer.writeInt(123);
-            writer.close();
-            out.close();
-        }catch(Exception e){ 
-            System.out.println("Exception occured while writing to log file: "+e);
-        }
+        boolean saved = save_data(123, file_name);
+        if(saved) System.out.println("Initialized Bill id: 123");
+        else System.out.println("Failed to intialise Bill id");
     }
 }

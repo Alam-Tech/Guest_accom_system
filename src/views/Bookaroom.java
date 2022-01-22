@@ -29,7 +29,7 @@ public class Bookaroom extends JFrame implements ActionListener
     private int user_id;
 
     public Bookaroom(int user_id){
-        setUI();
+        //setUI();
         setResizable(false);
         setBackground(new java.awt.Color(204, 204, 204));
         this.user_id = user_id;

@@ -219,33 +219,33 @@ public class PaymentWindow extends javax.swing.JDialog {
         pack();
     }
 
-    public static void main(String args[]) throws Exception {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PaymentWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PaymentWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PaymentWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PaymentWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        OrderInfo info = new OrderInfo();
-        info.num_days_of_stay = 1;
-        info.num_people = 1;
-        info.date_of_accomodation =new SimpleDateFormat("dd/mm/yyyy").parse("11/11/1111");
-         java.awt.EventQueue.invokeLater(new Runnable() {
-             public void run() {
-                 new PaymentWindow(1,1,info,null,null,null);
-             }
-         });
-    }
+    // public static void main(String args[]) throws Exception {
+    //     try {
+    //         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+    //             if ("Nimbus".equals(info.getName())) {
+    //                 javax.swing.UIManager.setLookAndFeel(info.getClassName());
+    //                 break;
+    //             }
+    //         }
+    //     } catch (ClassNotFoundException ex) {
+    //         java.util.logging.Logger.getLogger(PaymentWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //     } catch (InstantiationException ex) {
+    //         java.util.logging.Logger.getLogger(PaymentWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //     } catch (IllegalAccessException ex) {
+    //         java.util.logging.Logger.getLogger(PaymentWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //     } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+    //         java.util.logging.Logger.getLogger(PaymentWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //     }
+    //     OrderInfo info = new OrderInfo();
+    //     info.num_days_of_stay = 1;
+    //     info.num_people = 1;
+    //     info.date_of_accomodation =new SimpleDateFormat("dd/mm/yyyy").parse("11/11/1111");
+    //      java.awt.EventQueue.invokeLater(new Runnable() {
+    //          public void run() {
+    //              new PaymentWindow(1,1,info,null,null,null);
+    //          }
+    //      });
+    // }
 
     // Variables declaration
     public javax.swing.JLabel card_no_prompt;

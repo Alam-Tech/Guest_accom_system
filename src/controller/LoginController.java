@@ -6,7 +6,7 @@ import views.LoginWindow;
 
 public class LoginController {
 
-    private String get_string(char[] array){
+    public static String get_string(char[] array){
         String result = "";
         for(char element:array) result += element;
         return result;

@@ -18,7 +18,7 @@ public class AfterLogin extends JFrame implements ActionListener{
     JButton br,yb,cb,pb,lo;
     // String username = "User";
     public AfterLogin(String user_name,int user_id){
-        setUI();
+    //    setUI();
         this.user_id = user_id;
         setTitle("Welcome!");
         setResizable(false);
@@ -96,25 +96,6 @@ public class AfterLogin extends JFrame implements ActionListener{
             ResultWindow result_win = new ResultWindow(Purpose.ViewPrevBooking, user_id,
                                                        prev_bookings, null);
             //dispose();
-        }
-    }
-
-    private void setUI(){
-        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                try {
-                    UIManager.setLookAndFeel(info.getClassName());
-                } catch (ClassNotFoundException e) {
-                    System.out.println("Error!!! "+e);
-                } catch (InstantiationException e) {
-                    System.out.println("Error!!! "+e);
-                } catch (IllegalAccessException e) {
-                    System.out.println("Error!!! "+e);
-                } catch (UnsupportedLookAndFeelException e) {
-                    System.out.println("Error!!! "+e);
-                }
-                break;
-            }
         }
     }
 

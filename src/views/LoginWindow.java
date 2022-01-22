@@ -1,11 +1,10 @@
 package views;
 
 import javax.swing.*;
-
-import controller.LoginController;
-
 import java.awt.*;
 import java.awt.event.*;
+
+import controller.LoginController;
 
 public class LoginWindow extends JFrame{
     public JTextField user_name;
@@ -15,9 +14,10 @@ public class LoginWindow extends JFrame{
     private LoginController controller = new LoginController();
 
     public LoginWindow(){
+        setUI();
         setTitle("Login");
         setResizable(false);
-        setSize(380,380);
+        setSize(380,400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
         Container cont = getContentPane();
@@ -88,11 +88,20 @@ public class LoginWindow extends JFrame{
         login_btn.setBounds(140,240,100,30);
         cont.add(login_btn);
         
-        JLabel general_error = new JLabel("");
-        general_error.setForeground(Color.RED);
-        general_error.setFont(new Font("Sans Serif",Font.PLAIN,13));
-        general_error.setBounds(70,260,300,15);
-        cont.add(general_error);
+        JButton sign_up = new JButton("New User?");
+        sign_up.setFont(new Font("San Serif",Font.BOLD,15));
+        sign_up.setBounds(125,310,130,30);
+        sign_up.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                SignUp sign_up_win = new SignUp();
+            }
+        });
+        cont.add(sign_up);
+        // JLabel general_error = new JLabel("");
+        // general_error.setForeground(Color.RED);
+        // general_error.setFont(new Font("Sans Serif",Font.PLAIN,13));
+        // general_error.setBounds(70,260,300,15);
+        // cont.add(general_error);
 
         login_btn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -110,6 +119,25 @@ public class LoginWindow extends JFrame{
         });
 
         setVisible(true);
+    }
+
+    private void setUI(){
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                try {
+                    UIManager.setLookAndFeel(info.getClassName());
+                } catch (ClassNotFoundException e) {
+                    System.out.println("Error!!! "+e);
+                } catch (InstantiationException e) {
+                    System.out.println("Error!!! "+e);
+                } catch (IllegalAccessException e) {
+                    System.out.println("Error!!! "+e);
+                } catch (UnsupportedLookAndFeelException e) {
+                    System.out.println("Error!!! "+e);
+                }
+                break;
+            }
+        }
     }
 
     public static void main(String args[]){
