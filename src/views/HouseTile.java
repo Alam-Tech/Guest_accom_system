@@ -8,6 +8,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.border.LineBorder;
 
+
 import controller.HouseTileController;
 import controller.PurposeSelector.Purpose;
 import model.OrderInfo;
@@ -29,21 +30,6 @@ public class HouseTile extends JPanel{
         setBackground(Color.WHITE);
         setPreferredSize(new Dimension(800, 100));
             
-            // MouseListener ml = new MouseAdapter(){
-            //     @Override
-            //     public void mousePressed(MouseEvent e){
-            //         int house_id = (Integer)house_tray.get(i)[0];
-            //         System.out.println("The house");
-            //         HouseInfoWindow info_win = new HouseInfoWindow(user_id, 
-            //                                   house_id, order_info); 
-            //     }
-            // };
-            // sp1.addMouseListener(ml);
-
-           // if(i<t){
-            //if(bookaroom.el.isSelected())
-                //h1 = new JLabel("ELITE HOUSE "+i);
-            //else
             JLabel h1 = new JLabel((String)data_tray[1]);
             h1.setFont(new Font("Tahoma", Font.PLAIN, 24));
             h1.setBounds(290, 30, 171, 62);
@@ -82,7 +68,7 @@ public class HouseTile extends JPanel{
             }
 
             if(purpose == Purpose.Booking){
-                JButton buy_btn = new JButton("Buy Now");
+                JButton buy_btn = new JButton("Book Now");
                 buy_btn.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e){
                         //Action to open the billing window
@@ -92,14 +78,6 @@ public class HouseTile extends JPanel{
                 });
                 buy_btn.setBounds(600, 40, 100, 40);
                 add(buy_btn);
-
-                MouseListener ml = new MouseAdapter(){
-                    @Override
-                    public void mousePressed(MouseEvent e){
-                        HouseInfoWindow info_win = new HouseInfoWindow(user_id, id, order_info, result);
-                    }
-                };
-                addMouseListener(ml);
             }else if(purpose == Purpose.CancelBooking){
                 JButton cancel_btn = new JButton("Cancel");
                 cancel_btn.addActionListener(new ActionListener(){
@@ -123,12 +101,6 @@ public class HouseTile extends JPanel{
                             parent_win.dispose();
                             CancelationPopup pop = new CancelationPopup(is_positive, message);
                         }
-                        // if(result == 1 || result == -1){
-                        //     parent_win.dispose();
-                        //     if(result == 1) System.out.println("The cancellation was succesful!");
-                        //     else System.out.println("The cancellation wasn't succesful!");
-                        // }
-                        // System.out.println("Delete button pressed");
                     }
                 });
                 cancel_btn.setBounds(600, 40, 100, 40);
@@ -140,6 +112,18 @@ public class HouseTile extends JPanel{
                 add(status_msg);
             }
             
+            MouseListener ml = new MouseAdapter(){
+                @Override
+                public void mousePressed(MouseEvent e){
+                    if(purpose == Purpose.Booking){
+                        HouseInfoWindow info_win = new HouseInfoWindow(user_id, id, order_info, result);
+                    }else{
+                        OrderInfoWindow order_summary_win = new OrderInfoWindow(id);
+                    }
+                }
+            };
+            addMouseListener(ml);
+
             setBorder(new LineBorder(Color.BLACK,2));
         }
 }

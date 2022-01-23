@@ -101,7 +101,7 @@ public class DbBookings {
         try{
             if(query_result.next()){
                 result = new Object[]{
-                    query_result.getString("house_id"),
+                    query_result.getInt("house_id"),
                     query_result.getInt("booked_by"),
                     query_result.getInt("num_members"),
                     query_result.getString("start_date"),

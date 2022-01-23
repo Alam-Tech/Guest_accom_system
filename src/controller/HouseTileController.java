@@ -30,7 +30,7 @@ public class HouseTileController {
     
             String start_date = (String)bill_details[3];
             String current_date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-            if(DbInterface.compare_dates(start_date, current_date) == -1) return 2;
+            if(DbInterface.compare_dates(start_date, current_date) != 1) return 2;
 
             boolean cancelled = DbBookings.cancel_booking(bill_id, false);
             if(cancelled){

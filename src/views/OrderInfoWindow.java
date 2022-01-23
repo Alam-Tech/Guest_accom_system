@@ -1,12 +1,18 @@
 package views;
 
+import controller.OrderInfoController;
+
 public class OrderInfoWindow extends javax.swing.JFrame {
+    private OrderInfoController controller = new OrderInfoController();
 
     public OrderInfoWindow(int bill_id_num) {
+        setTitle("Booking summary");
         initComponents(bill_id_num);
+        controller.fill_details(this, bill_id_num);
+        setVisible(true);
     }
 
-    private void initComponents(int bill_id_num) {
+    private void initComponents(int bill_id) {
 
         Bill_ID = new javax.swing.JLabel();
         house_image = new javax.swing.JLabel();
@@ -19,12 +25,12 @@ public class OrderInfoWindow extends javax.swing.JFrame {
         Amt_paid = new javax.swing.JLabel();
         CCnum = new javax.swing.JLabel();
         Date_paid = new javax.swing.JLabel();
-        Ok_button = new javax.swing.JButton();
+        // Ok_button = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Bill_ID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Bill_ID.setText("Bill ID: "+ bill_id_num);
+        Bill_ID.setText("Bill ID: "+ bill_id);
 
         House_name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         House_name.setText("House Name");
@@ -55,15 +61,15 @@ public class OrderInfoWindow extends javax.swing.JFrame {
         Date_paid.setText("Paid on: ");
         Date_paid.setToolTipText("");
 
-        Ok_button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Ok_button.setText("OK");
-        Ok_button.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                dispose();
-            }
-        });
+        // Ok_button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        // Ok_button.setText("OK");
+        // Ok_button.addActionListener(new java.awt.event.ActionListener() {
+        //     @Override
+        //     public void actionPerformed(java.awt.event.ActionEvent evt)
+        //     {
+        //         dispose();
+        //     }
+        // });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,7 +97,8 @@ public class OrderInfoWindow extends javax.swing.JFrame {
                                                         .addComponent(Bill_ID)))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGap(197, 197, 197)
-                                                .addComponent(Ok_button)))
+                                                // .addComponent(Ok_button)
+                                                ))
                                 .addContainerGap(133, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -123,7 +130,7 @@ public class OrderInfoWindow extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(Date_paid)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Ok_button)
+                                // .addComponent(Ok_button)
                                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -155,16 +162,16 @@ public class OrderInfoWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration
-    private javax.swing.JLabel Amt_paid;
-    private javax.swing.JLabel Bill_ID;
-    private javax.swing.JLabel Booked_by;
-    private javax.swing.JLabel CCnum;
-    private javax.swing.JLabel Date_paid;
-    private javax.swing.JLabel Day_count;
-    private javax.swing.JLabel House_name;
-    private javax.swing.JLabel Occupant_count;
-    private javax.swing.JButton Ok_button;
-    private javax.swing.JLabel User_name;
-    private javax.swing.JLabel date_range;
-    private javax.swing.JLabel house_image;
+    public javax.swing.JLabel Amt_paid;
+    public javax.swing.JLabel Bill_ID;
+    public javax.swing.JLabel Booked_by;
+    public javax.swing.JLabel CCnum;
+    public javax.swing.JLabel Date_paid;
+    public javax.swing.JLabel Day_count;
+    public javax.swing.JLabel House_name;
+    public javax.swing.JLabel Occupant_count;
+    // public javax.swing.JButton Ok_button;
+    public javax.swing.JLabel User_name;
+    public javax.swing.JLabel date_range;
+    public javax.swing.JLabel house_image;
 }
