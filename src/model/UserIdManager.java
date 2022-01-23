@@ -23,8 +23,8 @@ public class UserIdManager extends FileHandler{
     }
 
     public static void main(String args[]){
-        boolean saved = save_data(1, file_name);
-        if(saved) System.out.println("Initialized User id: 1");
+        boolean saved = save_data(2, file_name);
+        if(saved) System.out.println("Initialized User id: 2");
         else System.out.println("Failed to intialise Bill id");
     }
 }

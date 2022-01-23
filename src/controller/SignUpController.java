@@ -45,7 +45,13 @@ public class SignUpController {
         String user_name = target.user_name.getText();
         String password = LoginController.get_string(target.password.getPassword());
         int new_user_id = UserIdManager.get_user_id();
-
-        return DbClient.add_user(new_user_id, user_name, password);
+        
+        boolean user_added = DbClient.add_user(new_user_id, user_name, password); 
+        if(user_added){
+            boolean state_saved = UserIdManager.save_state();
+            if(!state_saved) System.out.println("Failed to save state in UserIdManager!");
+            return true;
+        }
+        return false;
     }
 }
