@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-// import java.text.DateFormat;
-// import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
@@ -13,11 +11,9 @@ import org.jdatepicker.impl.*;
 
 import controller.BookaroomController;
 import controller.PurposeSelector.Purpose;
-// import model.DbInterface;
 import model.OrderInfo;
 
-public class Bookaroom extends JFrame implements ActionListener
-{
+public class Bookaroom extends JFrame implements ActionListener{
     JLabel bath,date,op,nop,nor,pref,toh,nos,date_error;
     public ButtonGroup house_type,attach_bath;
     public JComboBox<String> num_people,days;
@@ -29,7 +25,6 @@ public class Bookaroom extends JFrame implements ActionListener
     private int user_id;
 
     public Bookaroom(int user_id){
-        //setUI();
         setResizable(false);
         setBackground(new java.awt.Color(204, 204, 204));
         this.user_id = user_id;
@@ -192,33 +187,7 @@ public class Bookaroom extends JFrame implements ActionListener
                 ArrayList<Object[]> result = BookaroomController.search(Bookaroom.this);
                 OrderInfo order_info = BookaroomController.get_order_info(Bookaroom.this);
                 ResultWindow next = new ResultWindow(Purpose.Booking,user_id,result,order_info);
-                //dispose();
             }
         }
-    }
-
-    private void setUI(){
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-    }
-
-    public static void main(String args[]){
-        // DbInterface.initialize();
-        
-        // Bookaroom sample_win = new Bookaroom(1);
     }
 }

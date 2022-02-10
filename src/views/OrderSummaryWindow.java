@@ -1,9 +1,7 @@
 package views;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 import controller.OrderSummaryController;
 import model.OrderInfo;
@@ -32,7 +30,6 @@ public class OrderSummaryWindow extends JFrame {
         ppl_count = new javax.swing.JLabel();
         booking_date = new javax.swing.JLabel();
         booked_by_label = new javax.swing.JLabel();
-        //Bill_id = new javax.swing.JLabel();
         payment_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -40,13 +37,6 @@ public class OrderSummaryWindow extends JFrame {
         Bill_heading.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         Bill_heading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Bill_heading.setText("Billing Information");
-
-        // try{
-        //     myPicture = ImageIO.read(new File("src\\util\\images\\sample_house.jpg"));
-        //     house_image.setIcon(new javax.swing.ImageIcon(myPicture)); // NOI18N
-        //     house_image.setText("jLabel4");
-        // }catch(Exception e) {System.out.println("Image not available");}
-        // house_image.setText("jLabel1");
 
         house_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         house_name.setText("House Name");
@@ -68,14 +58,11 @@ public class OrderSummaryWindow extends JFrame {
         booked_by_label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         booked_by_label.setText("Booked By: \"username\"");
         OrderSummaryWindow order_window= this;
-        // Bill_id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        // Bill_id.setText("Bill ID: 19932");
-
+        
         payment_button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         payment_button.setText("Make Payment");
         payment_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //payment_buttonActionPerformed(evt);
                 PaymentWindow new_window= new PaymentWindow(user_id,house_id,order_info, order_window, house_window, result_window);
             }
         });
@@ -132,7 +119,6 @@ public class OrderSummaryWindow extends JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(booked_by_label)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                // .addComponent(Bill_id)
                                 .addGap(37, 37, 37)
                                 .addComponent(payment_button)
                                 .addContainerGap(39, Short.MAX_VALUE))
@@ -141,35 +127,8 @@ public class OrderSummaryWindow extends JFrame {
         pack();
     }
 
-    // public static void main(String args[]) {
-    //     try {
-    //         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-    //             if ("Nimbus".equals(info.getName())) {
-    //                 javax.swing.UIManager.setLookAndFeel(info.getClassName());
-    //                 break;
-    //             }
-    //         }
-    //     } catch (ClassNotFoundException ex) {
-    //         java.util.logging.Logger.getLogger(OrderSummaryWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     } catch (InstantiationException ex) {
-    //         java.util.logging.Logger.getLogger(OrderSummaryWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     } catch (IllegalAccessException ex) {
-    //         java.util.logging.Logger.getLogger(OrderSummaryWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-    //         java.util.logging.Logger.getLogger(OrderSummaryWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     }
-
-    //     java.awt.EventQueue.invokeLater(new Runnable() {
-    //         public void run() {
-    //             System.out.println("For testing");
-    //             //new orderSummary();
-    //         }
-    //     });
-    // }
-
     // Variables declaration
     public javax.swing.JLabel Bill_heading;
-    // public javax.swing.JLabel Bill_id;
     public javax.swing.JLabel Price;
     public javax.swing.JLabel accom_date;
     public javax.swing.JLabel booked_by_label;

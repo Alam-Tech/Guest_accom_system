@@ -5,7 +5,6 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 import java.awt.*;
-import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 import controller.PaymentController;
@@ -74,11 +73,6 @@ public class PaymentWindow extends javax.swing.JDialog {
 
         credit_card_choose.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         credit_card_choose.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MasterCard", "IndusInd", "Standard Chartered", "ICICI", "VISA" }));
-        // credit_card_choose.addActionListener(new java.awt.event.ActionListener() {
-        //     public void actionPerformed(java.awt.event.ActionEvent evt) {
-        //         credit_card_chooseActionPerformed(evt);
-        //     }
-        // });
 
         card_no_prompt.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         card_no_prompt.setText("Card Number");
@@ -89,11 +83,6 @@ public class PaymentWindow extends javax.swing.JDialog {
         cvv_label.setText("CVV ");
 
         cvv_input.setDocument(new LengthRestrictedDocument(3));
-        // cvv_input.addActionListener(new java.awt.event.ActionListener() {
-        //     public void actionPerformed(java.awt.event.ActionEvent evt) {
-        //         cvv_inputActionPerformed(evt);
-        //     }
-        // });
 
         expiry_label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         expiry_label.setText("Expiry Date");
@@ -103,7 +92,6 @@ public class PaymentWindow extends javax.swing.JDialog {
         datePicker = new JDatePickerImpl(datePanel,new DateLabelFormatter());
         
         pay_button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        // String amount="1234";
         pay_button.setText("Pay Rs.0");
         PaymentWindow this_window=this;
         pay_button.addActionListener(new java.awt.event.ActionListener() {
@@ -218,34 +206,6 @@ public class PaymentWindow extends javax.swing.JDialog {
 
         pack();
     }
-
-    // public static void main(String args[]) throws Exception {
-    //     try {
-    //         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-    //             if ("Nimbus".equals(info.getName())) {
-    //                 javax.swing.UIManager.setLookAndFeel(info.getClassName());
-    //                 break;
-    //             }
-    //         }
-    //     } catch (ClassNotFoundException ex) {
-    //         java.util.logging.Logger.getLogger(PaymentWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     } catch (InstantiationException ex) {
-    //         java.util.logging.Logger.getLogger(PaymentWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     } catch (IllegalAccessException ex) {
-    //         java.util.logging.Logger.getLogger(PaymentWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-    //         java.util.logging.Logger.getLogger(PaymentWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     }
-    //     OrderInfo info = new OrderInfo();
-    //     info.num_days_of_stay = 1;
-    //     info.num_people = 1;
-    //     info.date_of_accomodation =new SimpleDateFormat("dd/mm/yyyy").parse("11/11/1111");
-    //      java.awt.EventQueue.invokeLater(new Runnable() {
-    //          public void run() {
-    //              new PaymentWindow(1,1,info,null,null,null);
-    //          }
-    //      });
-    // }
 
     // Variables declaration
     public javax.swing.JLabel card_no_prompt;

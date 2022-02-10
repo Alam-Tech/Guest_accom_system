@@ -1,12 +1,11 @@
 package views;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 import controller.SignUpController;
 import views.popups.CancelationPopup;
-
-import java.awt.*;
-import java.awt.event.*;
 
 public class SignUp extends JFrame{
     public JTextField user_name;
@@ -53,7 +52,6 @@ public class SignUp extends JFrame{
         password_label.setBounds(50,130,100,20);
         cont.add(password_label);
 
-        // JTextField password = new JTextField(25);
         password = new JPasswordField();
         password.addKeyListener(new KeyAdapter() {
             @Override
@@ -126,9 +124,5 @@ public class SignUp extends JFrame{
         cont.add(sign_up_btn);
 
         setVisible(true);
-    }
-    
-    public static void main(String args[]){
-        SignUp sample_win = new SignUp();
     }
 }

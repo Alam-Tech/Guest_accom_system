@@ -61,16 +61,6 @@ public class OrderInfoWindow extends javax.swing.JFrame {
         Date_paid.setText("Paid on: ");
         Date_paid.setToolTipText("");
 
-        // Ok_button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        // Ok_button.setText("OK");
-        // Ok_button.addActionListener(new java.awt.event.ActionListener() {
-        //     @Override
-        //     public void actionPerformed(java.awt.event.ActionEvent evt)
-        //     {
-        //         dispose();
-        //     }
-        // });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,7 +120,6 @@ public class OrderInfoWindow extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(Date_paid)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                // .addComponent(Ok_button)
                                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -170,7 +159,6 @@ public class OrderInfoWindow extends javax.swing.JFrame {
     public javax.swing.JLabel Day_count;
     public javax.swing.JLabel House_name;
     public javax.swing.JLabel Occupant_count;
-    // public javax.swing.JButton Ok_button;
     public javax.swing.JLabel User_name;
     public javax.swing.JLabel date_range;
     public javax.swing.JLabel house_image;

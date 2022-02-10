@@ -22,7 +22,6 @@ public class ResultWindow extends JFrame{
 
         p1 = new JPanel();
         p1.setLayout(new FlowLayout());
-        //p1.setBackground(Color.WHITE);
         p1.setPreferredSize(new Dimension(800, 100));
 
         
@@ -73,19 +72,6 @@ public class ResultWindow extends JFrame{
             cp.add(sp, BorderLayout.CENTER);
 
             for (i = 0; i < house_tray.size(); i++) {
-                // if(purpose == Purpose.Booking){
-                //     // HouseTile temp = new HouseTile(
-                //     //     (Integer)house_tray.get(i)[0], (String)house_tray.get(i)[1], 
-                //     //     (Double)house_tray.get(i)[2],(String)house_tray.get(i)[3],
-                //     //     user_id, order_info,this);
-                //     // p2.add(temp);
-                // }else if(purpose == Purpose.ViewActiveBooking){
-
-                // }else if(purpose == Purpose.ViewPrevBooking){
-
-                // }else if(purpose == Purpose.CancelBooking){
-
-                // }
                 HouseTile temp = new HouseTile(purpose,house_tray.get(i),
                                                user_id,order_info,this);
                 p2.add(temp);
@@ -99,25 +85,5 @@ public class ResultWindow extends JFrame{
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
-
-    //  public static void main(String args[]){
-    //      try {
-    //          for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-    //              if ("Nimbus".equals(info.getName())) {
-    //                  javax.swing.UIManager.setLookAndFeel(info.getClassName());
-    //                  break;
-    //              }
-    //          }
-    //      } catch (ClassNotFoundException ex) {
-    //          java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //      } catch (InstantiationException ex) {
-    //          java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //      } catch (IllegalAccessException ex) {
-    //          java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //      } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-    //          java.util.logging.Logger.getLogger(Bookaroom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //      }
-    //      //ResultWindow sample_win = new ResultWindow();
-    //  }
 }
 

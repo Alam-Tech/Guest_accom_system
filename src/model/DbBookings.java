@@ -4,8 +4,6 @@ import java.sql.ResultSet;
 import java.util.*;
 
 public class DbBookings {
-    // private static int bill_no = 1234;
-
     /**
      * This function is to register a succesful booking in DB
      * @param house_id id of the house
@@ -45,7 +43,6 @@ public class DbBookings {
         ResultSet bill_query_result = DbInterface.fetch_table(query);
         ArrayList<Object[]> result = new ArrayList<>();
         try{
-            // ArrayList<Object> house_query_result = DbHouseRecord.get_house(bill_query_result.getInt("house_id"));
             while(bill_query_result.next()){
                 query = "select name,photo from house_record where id = "+bill_query_result.getInt("house_id");
                 ResultSet house_query_result = DbInterface.fetch_table(query);
@@ -53,7 +50,6 @@ public class DbBookings {
                 if(house_query_result.next()){
                     result.add(new Object[]{
                         bill_query_result.getInt("id"),
-                        // bill_query_result.getInt("house_id"),
                         house_query_result.getString("name"),
                         bill_query_result.getInt("num_members"),
                         house_query_result.getString("photo"),

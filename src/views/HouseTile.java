@@ -18,9 +18,7 @@ import views.popups.ConfirmCancel;
 public class HouseTile extends JPanel{
     private int id;
     private ResultWindow parent_win;
-    // public HouseTile(int id,String name,double price,
-    //                  String photo_name,int user_id,
-    //                  OrderInfo order_info, ResultWindow result){
+    
     public HouseTile(Purpose purpose,Object[] data_tray,int user_id,
                      OrderInfo order_info, ResultWindow result){
         this.id = (Integer)data_tray[0];

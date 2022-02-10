@@ -111,14 +111,4 @@ public class DbHouseRecord {
         int result = DbInterface.update_row(query);
         return result == 1;
     }
-
-    // public static void main(String args[]){
-    //     DbInterface.initialize();
-    //     String[] data = get_user(12);
-    //     if(data == null){
-    //         System.out.println("There is no data!");
-    //     }else{
-    //         System.out.println("The user name is "+data[0]);
-    //     }
-    // }
 }

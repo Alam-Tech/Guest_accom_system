@@ -2,7 +2,6 @@ package controller;
 
 import java.io.File;
 import java.util.*;
-
 import javax.imageio.ImageIO;
 
 import model.DbHouseRecord;

@@ -1,12 +1,8 @@
 package views;
 
-import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 
 import controller.HouseInfoController;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-
 import model.OrderInfo;
 
 public class HouseInfoWindow extends javax.swing.JFrame {
@@ -45,11 +41,9 @@ public class HouseInfoWindow extends javax.swing.JFrame {
         Book_button.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //System.out.println("Button clicked");
                 OrderSummaryWindow Order_window = new OrderSummaryWindow(
                     user_id,house_id,order_info, house_window, result
                 );
-                //Book_buttonActionPerformed(evt);
             }
         });
 
@@ -61,12 +55,6 @@ public class HouseInfoWindow extends javax.swing.JFrame {
         house_rate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         house_rate.setText("Cost per day: N/A");
         
-        // try{
-        // BufferedImage myPicture = ImageIO.read(new File("src\\util\\images\\sample_house.jpg"));
-        // house_image.setIcon(new javax.swing.ImageIcon(myPicture)); // NOI18N
-        // house_image.setText("jLabel4");
-        // }catch(Exception e) {house_image.setText("Image not available");}
-
         Accessory_heading.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Accessory_heading.setText("Accessories in house: ");
 
@@ -145,31 +133,6 @@ public class HouseInfoWindow extends javax.swing.JFrame {
 
         pack();
     }
-
-    // public static void main(String args[]) {
-    //     try {
-    //         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-    //             if ("Nimbus".equals(info.getName())) {
-    //                 javax.swing.UIManager.setLookAndFeel(info.getClassName());
-    //                 break;
-    //             }
-    //         }
-    //     } catch (ClassNotFoundException ex) {
-    //         java.util.logging.Logger.getLogger(HouseInfoWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     } catch (InstantiationException ex) {
-    //         java.util.logging.Logger.getLogger(HouseInfoWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     } catch (IllegalAccessException ex) {
-    //         java.util.logging.Logger.getLogger(HouseInfoWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-    //         java.util.logging.Logger.getLogger(HouseInfoWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     }
-
-    //     java.awt.EventQueue.invokeLater(new Runnable() {
-    //         public void run() {
-    //             new HouseInfoWindow(1,1,null,null).setVisible(true);
-    //         }
-    //     });
-    // }
 
     // Variables declaration
     public javax.swing.JTextArea AccessoryList;

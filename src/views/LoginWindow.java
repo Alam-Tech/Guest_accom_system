@@ -53,7 +53,6 @@ public class LoginWindow extends JFrame{
         password_label.setBounds(50,130,100,20);
         cont.add(password_label);
 
-        // JTextField password = new JTextField(25);
         password = new JPasswordField();
         password.addKeyListener(new KeyAdapter() {
             @Override
@@ -97,12 +96,7 @@ public class LoginWindow extends JFrame{
             }
         });
         cont.add(sign_up);
-        // JLabel general_error = new JLabel("");
-        // general_error.setForeground(Color.RED);
-        // general_error.setFont(new Font("Sans Serif",Font.PLAIN,13));
-        // general_error.setBounds(70,260,300,15);
-        // cont.add(general_error);
-
+        
         login_btn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 boolean is_ok = controller.validate(LoginWindow.this);

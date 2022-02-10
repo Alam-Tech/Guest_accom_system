@@ -8,17 +8,14 @@ import java.util.*;
 
 import controller.AfterLoginController;
 import controller.PurposeSelector.Purpose;
-// import model.BillManager;
-// import model.DbInterface;
 
 public class AfterLogin extends JFrame implements ActionListener{
     private AfterLoginController controller = new AfterLoginController();
     private int user_id;
     JLabel x,y;
     JButton br,yb,cb,pb,lo;
-    // String username = "User";
+    
     public AfterLogin(String user_name,int user_id){
-    //    setUI();
         this.user_id = user_id;
         setTitle("Welcome!");
         setResizable(false);
@@ -72,43 +69,22 @@ public class AfterLogin extends JFrame implements ActionListener{
             LoginWindow login_win = new LoginWindow();
         }
         if(e.getSource()==br){
-            //Book a room
-            //dispose();
             Bookaroom pref_win = new Bookaroom(user_id);
         }
         if(e.getSource()==yb){
-            //your booking
-            //dispose();
             ArrayList<Object[]> active_bookings = controller.get_active_bookings(user_id);
             ResultWindow result_win = new ResultWindow(Purpose.ViewActiveBooking, user_id,
                                                        active_bookings, null);
         }
         if(e.getSource()==cb){
-            //cancel booking
             ArrayList<Object[]> active_bookings = controller.get_active_bookings(user_id);
             ResultWindow result_win = new ResultWindow(Purpose.CancelBooking, user_id,
                                                        active_bookings, null);
-            //System.exit(0);
         }
         if(e.getSource()==pb){
-            //previous booking
             ArrayList<Object[]> prev_bookings = controller.get_previous_bookings(user_id);
             ResultWindow result_win = new ResultWindow(Purpose.ViewPrevBooking, user_id,
                                                        prev_bookings, null);
-            //dispose();
         }
-    }
-
-    public static void main(String[] args) {
-
-        
-        // boolean db_connected = DbInterface.initialize();
-        // boolean bill_manager_connected = BillManager.initialize();
-        // // DbInterface.update_tables(1);
-        // if(!db_connected) System.out.println("DB Initialisation failed!");
-        // else if(!bill_manager_connected) System.out.println("Bill Manager intiialisation failed!");
-        // else{
-        //     AfterLogin g = new AfterLogin("Cool Guy",1);
-        // }
     }
 }

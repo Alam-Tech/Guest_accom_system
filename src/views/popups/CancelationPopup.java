@@ -9,15 +9,12 @@ public class CancelationPopup extends JDialog{
         setLayout(null);
         setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        // String message_string = "Booking Cancelation ";
         String button_string = "Close";
         
         if(positive){
             setTitle("Success");
-            // message_string += " was succesful!";
         }else{
             setTitle("Failed");
-            // message_string += " failed.";
         }
 
         JLabel message_field = new JLabel(message);

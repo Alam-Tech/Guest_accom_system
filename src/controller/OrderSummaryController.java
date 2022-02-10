@@ -4,7 +4,6 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
 import javax.imageio.ImageIO;
 
 import model.DbClient;
@@ -28,9 +27,7 @@ public class OrderSummaryController {
             System.out.println("Image not available");
             target.house_image.setText("Image Unavailable");
         }
-        //house_image.setText("jLabel1");
-        //target.myPicture.se
-
+        
         target.house_name.setText((String)house_details.get(0));
         target.Price.setText("Cost per day: Rs."+house_details.get(1));
         

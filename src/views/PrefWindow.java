@@ -38,9 +38,6 @@ public class PrefWindow extends JDialog{
     public JLabel house_type_error,date_of_accom_error;
     public ArrayList<JCheckBox> pref_acc = new ArrayList<>();
 
-    // private String datePattern = "yyyy-MM-dd";
-    // private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
-
     public PrefWindow(int user_id){
         super((Window)null);
         setModal(true);
@@ -51,7 +48,6 @@ public class PrefWindow extends JDialog{
         setLayout(null);
         Container cont = getContentPane();
 
-        //JDatePanelImpl datePanel = new JDatePanelImpl();
         UtilDateModel model = new UtilDateModel();
         JDatePanelImpl datePanel = new JDatePanelImpl(model, new Properties());
         JDatePickerImpl datePicker = new JDatePickerImpl(datePanel,new DateLabelFormatter());
@@ -75,9 +71,5 @@ public class PrefWindow extends JDialog{
         });
 
         setVisible(true);
-    }
-
-    public static void main(String args[]){
-        PrefWindow test_win = new PrefWindow(1);
     }
 }

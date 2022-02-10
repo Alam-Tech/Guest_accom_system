@@ -20,10 +20,8 @@ public class AfterLoginController {
         result = DbBookings.get_bookings(user_id);
         ArrayList<Object[]> refined_result = new ArrayList<>();
         
-        // String today = formatter.format(new Date());
         for(Object[] element:result){
             if(element[6].equals("confirmed")) refined_result.add(element);
-            // if(compare_dates(today, (String)element[5]) < 1) refined_result.add(element);
         }
         return refined_result;
     } 
@@ -39,10 +37,8 @@ public class AfterLoginController {
         result = DbBookings.get_bookings(user_id);
         ArrayList<Object[]> refined_result = new ArrayList<>();
         
-        // String today = formatter.format(new Date());
         for(Object[] element:result){
             if(element[6].equals("expired") || element[6].equals("cancelled")) refined_result.add(element);
-            // if(compare_dates(today, (String)element[5]) == 1) refined_result.add(element);
         }
         return refined_result;
     }
